@@ -1,0 +1,223 @@
+# Atlas Site Revamp - Content Requirements
+
+## Content Usage Policy
+
+**CRITICAL**: All content in this document must be used exactly as written. No modifications, polish, or edits without explicit permission from project stakeholder.
+
+## Homepage Content Requirements
+
+### Main Welcome Panel
+```
+Welcome to Atlas.
+A growing lab of tools for real estate intelligence.
+Built by a team that prefers outputs over promises.
+
+> Atlas is an evolving product lab for real estate intelligence.
+> We're building tools that help people make smarter investment decisions
+```
+
+### Homepage Navigation Cards
+
+#### "What We Build" Card
+**Title**: "What We Build"
+**Content**: 
+> "Atlas creates tools for real estate intelligence."
+
+**Extended Content**:
+- Core Message: We build software that helps people and companies make better real estate decisions — starting with AI that can actually interpret properties, neighborhoods, and market context.
+- Quote: *"Atlas is building a layer of intelligence on top of Europe's real estate markets. We gather, analyze, and simplify property data so you can make smarter decisions."*
+- One-liner: *"From property data to decision-ready insights."*
+- Short intro to current tools:
+  - 🧠 **Real Estate Analyzer** — AI-generated property reports from public data.
+  - 📊 **Comparison Dashboard** (Coming soon) — Compare properties side-by-side.
+  - 💸 **Fractional Toolkit** (Later) — Infrastructure for shared real estate ownership.
+- Future product path: insights → comparison → action → ownership.
+
+#### "Why We Exist" Card
+**Title**: "Why We Exist"
+**Content**:
+> "Real estate is noisy, slow, and inaccessible — we want to change that."
+
+**Extended Content**:
+- Core Message: We believe that good property decisions shouldn't depend on insider access, expensive advisors, or guesswork. That's why we're building smarter tools — to help regular people and smart teams see more clearly.
+- Quote: *"We started by trying to fractionalize properties. Then we hit legal walls and shifted focus — now we build tools to understand markets before we transform them."*
+- Problems:
+  - Data is fragmented and hard to use.
+  - Market analysis is often opinion-driven or paywalled.
+  - Fractionalization has huge potential but lacks trusted infrastructure.
+- Our belief: *Transparency + Intelligence = Better Outcomes*
+
+#### "Who We Are" Card
+**Title**: "Who We Are"
+**Content**:
+> "Small team. Clear mission. No suits, just builders."
+
+**Extended Content**:
+- Core Message: We're a multidisciplinary team of builders — combining finance, AI, product, and design — on a mission to make real estate smarter, more accessible, and more honest.
+- Quote: *"We're a small European team — data freaks, product nerds, and frustrated investors — trying to make real estate less murky."*
+- Content Ideas:
+  - Short bios with roles (1–2 lines max each)
+  - Origin story: started with the idea of fractional investing → pivoted to building trust through tools.
+  - Link to our Operating Principles (Codex)
+  - "Built from the Netherlands & Spain"
+
+#### "Our Timeline" Card
+**Title**: "Our Timeline"
+**Content**:
+> "From messy Figma files to a growing ecosystem."
+
+**Extended Content**:
+- Core Message: We build in phases. This is what we've done, what we're doing now, and what's next.
+- Content Ideas:
+  - Visual horizontal timeline or tabbed phase layout
+  - Current Phase (e.g. "MVP + Signal")
+  - Upcoming: Validation & Revenue → Monetization → Return to Fractionalization
+  - Link to full Project Log
+  - Quote or belief: *"We build in public because we believe trust is earned through clarity."*
+
+### Homepage Footer
+**Content**: 
+```
+Built in public - Read the project log →
+```
+
+## Full Modal Content Requirements
+
+### Project Log Modal
+**Title**: "Project Log"
+**Subtitle**: "Follow our journey as we build tools for real estate intelligence."
+**Description**: "From data bugs to product wins — everything's here."
+
+**Purpose**: This is Atlas' "open lab notebook" — a place where people can follow what's happening, what's changing, and how the product is evolving. It's not a blog. It's an archive of real decisions and updates.
+
+**Filter Categories**:
+- 📦 Product
+- 🔐 Legal
+- 💰 Fundraising
+- 🎨 UX & Design
+- 📚 Learnings
+- 🧑‍🤝‍🧑 Team
+
+**Example Entry**:
+- **Title**: *"Why we paused fractionalization (for now)"*
+- **Excerpt**: We set out to tokenize property ownership, but legal friction + lack of capital shifted our attention to something more urgent: trust and data. This post explains our pivot.
+- **Date**: May 2025
+- **Tags**: Legal, Strategy
+
+### Atlas Tools Modal
+**Title**: "Atlas Tools"
+**Subtitle**: "Smart utilities for real estate thinking — built in-house, shared with the world."
+
+#### Real Estate Analyzer Tool Card
+**Title**: 🔍 Real Estate Analyzer
+**What it does**: Input a property link, get a clean AI-generated investment report.
+**For**: Buyers, investors, advisors
+**Status**: ✅ Live
+**Actions**: [Launch Tool] [How it works]
+
+#### Comparison Tool Card
+**Title**: 🆕 Comparison Tool
+**What it does**: Side-by-side AI breakdown of 3 properties.
+**For**: Buyers choosing between listings
+**Status**: 🔜 Coming soon
+**Actions**: [Join Waitlist]
+
+#### Future Tools
+- 🧾 *Neighborhood Risk Report* — pollution, crime, air quality, etc.
+- 💬 *AI Chat Assistant* — Ask context-aware questions about any listing.
+- 📈 *Dynamic ROI Planner* — Customize mortgage, taxes, rent to model returns.
+
+### About Atlas Modal
+**Title**: "About Atlas"
+
+#### Section 1: Who We Are
+> Atlas is an evolving product lab focused on real estate intelligence.
+> 
+> We're not here to "disrupt" — we're here to build better tools, grounded in data, for people who actually want to understand property.
+
+#### Section 2: The Founders
+- **Photo** (clean B&W optional)
+- **Name**
+- **Role** (e.g. Structure & Strategy / Engineering / Product)
+- **1-liner Philosophy** (e.g. "No buzzwords, just working code.")
+- **Optional**: "Ask me about…" / LinkedIn / Twitter
+
+#### Section 3: Our Principles
+> We believe in fast decisions, no sacred cows, and useful output over fancy ideas.
+> 
+> [View the Codex →]
+
+#### Section 4: Our Thesis
+> Real estate has become one of the most opaque and inefficient markets in Europe.
+> 
+> Atlas exists to make it readable — not just by humans, but by AI.
+> 
+> We believe in building tools that lower barriers to insight, not just ownership.
+> 
+> Over time, we'll explore ways to fractionalize and simplify investment access — but first, we need clarity. That's what we're building now.
+
+#### Section 5: Our Timeline
+Simple 3-panel horizontal slider or graphic:
+1. **2024**: Formed, explored fractionalization
+2. **2025**: Pivoted to Intelligence Layer → building tools & trust
+3. **2026+**: Launching smarter investment products
+
+### Get Involved Modal
+**Title**: "Get Involved"
+
+#### Block 1: Subscribe for Updates
+> Want to follow our builds, insights, and drops?
+> 
+> Subscribe to get sharp, occasional updates from the lab.
+
+**Action**: Email input + subscribe button
+**Optional**: link to example update ("See an example →")
+
+#### Block 2: Talk to the Team
+> Have a question, idea, or use case we should hear about?
+> 
+> Drop us a line — we read every message.
+
+**Action**: Contact form (Name / Email / Message)
+**Optional tags**: [Investor] [Collaboration] [Product Feedback] [Legal Help]
+**CTA**: "Send Message"
+
+#### Block 3: Submit a Use Case
+> Got a real estate challenge that needs smarter tools?
+> 
+> Tell us about it — your case could shape our roadmap.
+
+**Action**: Link to form or embedded Typeform/Notion form
+**CTA**: "Suggest a use case →"
+
+#### Optional Extras:
+- 🧠 Feature Request?
+  > Something you wish our tools could do?
+  > 
+  > [Submit a feature request →]
+
+- 🤝 Partner With Us?
+  > Think your tech or data can plug into Atlas?
+  > 
+  > [Explore partnerships →]
+
+## Content Integration Guidelines
+
+### Mandatory Requirements:
+1. **Exact Content Usage**: All quoted content must be used exactly as written
+2. **No Editing**: No modifications, polish, or improvements without permission
+3. **Consistent Tone**: Maintain the established voice throughout all components
+4. **Hierarchy Respect**: Homepage cards show teasers, full modals show complete content
+
+### Content Adaptation Rules:
+- **Homepage Cards**: Use brief intro portions only
+- **Full Modals**: Use complete extended content
+- **Placeholder Content**: Only for technical testing during development
+- **Future Content**: Mark clearly as "Coming Soon" or "Placeholder"
+
+---
+
+**Content Approval**: All content specifications approved for exact usage  
+**Last Updated**: January 6, 2025  
+**Content Owner**: Atlas Team  
+**Integration Reference**: `Phase-3-Full-Page-Modals-Progress.mdc`

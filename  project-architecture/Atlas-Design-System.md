@@ -1,4 +1,4 @@
-# Atlas Project Lab Dashboard - Design System
+ # Atlas Project Lab Dashboard - Design System
 
 ## 🎨 Design Philosophy
 

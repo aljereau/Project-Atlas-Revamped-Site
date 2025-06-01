@@ -1,0 +1,221 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Phase 2: Homepage & Core Modal Components - Definition
+
+## Overview
+
+This phase focuses on building the complete Atlas homepage layout with main welcome panel and expandable navigation cards, implementing core homepage components following modal-first design principles. The goal is to create a fully functional dashboard-style interface that communicates Atlas's mission through navigation cards that expand to modal overlays, maintaining the paper-like organic aesthetic established in Phase 1.
+
+## Objectives
+
+1. **Build Homepage Layout**: Create main welcome panel with Atlas branding and messaging following exact content specifications
+2. **Implement Navigation Cards**: Develop expandable homepage navigation cards ("What we build", "Why we exist", "Who we are", "Our timeline")
+3. **Integrate Modal System**: Connect navigation cards to modal system with smooth Framer Motion animations
+4. **Establish Navigation Menu**: Create base navigation menu with modal trigger functionality
+5. **Ensure Content Fidelity**: Implement exact Atlas content without modifications, using content exactly as specified
+
+## Prerequisites
+
+* **Phase 1 Complete**: `Phase-1-Foundation-Design-System-Progress.mdc` shows all DoD items verified ✅
+* **Atlas Design System**: Complete design system implemented in Tailwind CSS with muted color palette ✅
+* **Component Architecture**: Modular component structure with TypeScript types established ✅
+* **Modal System Foundation**: Base modal component and useModal hook implemented ✅
+* **Content Requirements**: Atlas content specifications documented with exact usage policy ✅
+
+## Assumptions
+
+* The existing modal system foundation from Phase 1 will remain stable and performant
+* Navigation cards will use hover states and click interactions for modal expansion
+* All content will be used exactly as provided in Atlas content specifications
+* Mobile responsiveness will be addressed in Phase 4 unless critical for core functionality
+* Framer Motion animations will not impact performance negatively
+
+## Scope
+
+### In Scope:
+
+* Homepage layout component with main welcome panel and container structure
+* Four navigation cards: "What we build", "Why we exist", "Who we are", "Our timeline"
+* Hero section with "Welcome to Atlas" title and tagline display
+* Basic modal integration connecting navigation cards to modal system
+* Main navigation menu component with modal trigger functionality
+* CTA buttons: "Explore our tools" and footer "Read the project log" links
+* Responsive grid layout for navigation cards following design system
+
+### Out of Scope:
+
+* Full modal content implementation (deferred to Phase 3)
+* Advanced animations beyond basic open/close transitions (deferred to Phase 4)
+* Mobile-specific optimizations unless essential for basic functionality
+* Real Estate Analyzer tool implementation (Phase 3)
+* Project log content implementation (Phase 3)
+* Performance optimization beyond functional requirements
+
+## Risks
+
+### High Risk:
+* **Modal State Management Complexity**: Multiple navigation cards triggering different modals
+  - **Mitigation**: Use centralized modal state with clear modal ID system
+  - **Contingency**: Implement modal queue system if needed
+
+### Medium Risk:
+* **Content Hierarchy Confusion**: Users might not understand teaser vs full content distinction
+  - **Mitigation**: Clear visual indicators and smooth transitions between states
+  - **Contingency**: Add explicit content previews in navigation cards
+
+### Low Risk:
+* **Animation Performance**: Framer Motion animations causing lag on older devices
+  - **Mitigation**: Test animations on various devices during development
+  - **Contingency**: Implement reduced-motion alternatives
+
+## Tasks
+
+### Task 2.1: Homepage Layout & Hero Section
+**Duration**: 1 day
+**Description**: Build main homepage container with hero section and Atlas branding
+
+**Subtasks**:
+- 2.1.1: Create homepage layout component with proper container structure
+- 2.1.2: Implement hero section with "Welcome to Atlas" title and tagline
+- 2.1.3: Add main container styling following Atlas Design System
+- 2.1.4: Ensure responsive layout foundation
+- 2.1.5: Connect homepage to Next.js App Router
+
+### Task 2.2: Navigation Cards Implementation
+**Duration**: 1-2 days
+**Description**: Build four expandable navigation cards with Atlas content
+
+**Subtasks**:
+- 2.2.1: Create NavigationCard component with hover states and click handling
+- 2.2.2: Implement "What we build" card with exact content specifications
+- 2.2.3: Implement "Why we exist" card with mission teaser content
+- 2.2.4: Implement "Who we are" card with team introduction content
+- 2.2.5: Implement "Our timeline" card with company evolution content
+- 2.2.6: Create responsive grid layout for all navigation cards
+
+### Task 2.3: Modal System Integration
+**Duration**: 1 day
+**Description**: Connect navigation cards to modal system with smooth transitions
+
+**Subtasks**:
+- 2.3.1: Integrate useModal hook with navigation card click handlers
+- 2.3.2: Create basic modal content placeholders for each navigation card
+- 2.3.3: Implement smooth open/close animations using Framer Motion
+- 2.3.4: Test modal state management with multiple modal instances
+- 2.3.5: Ensure proper modal overlay handling and keyboard navigation
+
+### Task 2.4: Navigation Menu & CTA Implementation
+**Duration**: 1 day
+**Description**: Create main navigation menu and call-to-action buttons
+
+**Subtasks**:
+- 2.4.1: Create Navigation component with modal trigger functionality
+- 2.4.2: Implement "Explore our tools" CTA button with modal integration
+- 2.4.3: Create footer with "Built in public - Read the project log →" link
+- 2.4.4: Connect navigation menu items to modal system
+- 2.4.5: Test complete navigation flow from homepage to modals
+
+## Implementation Guidelines
+
+### Development Standards:
+- Follow `@code-quality-pep8-python-001.mdc` adapted for TypeScript/React
+- Use `@component-validation-before-advancement-001.mdc` for component testing
+- Apply `@automated-test-requirements-001.mdc` for component unit tests
+- Follow `@commit-standard-format-001.mdc` for version control
+
+### Component Architecture:
+- Build components with clean props interfaces for transferability
+- Use exact Atlas content from content specifications without modification
+- Ensure all components export cleanly and can be imported independently
+- Follow established TypeScript type definitions from Phase 1
+
+### Testing Requirements:
+- Unit tests for all navigation card components
+- Modal integration testing with different content types
+- Responsive layout testing across device sizes
+- Animation performance testing for smooth user experience
+
+## Deliverables
+
+### Primary Deliverables:
+1. **Complete Homepage Layout**: Functional homepage with hero section and navigation cards
+2. **Navigation Card Components**: Four working navigation cards with exact Atlas content
+3. **Modal Integration**: Working modal system connecting cards to overlay content
+4. **Navigation Menu**: Base navigation menu with modal trigger functionality
+5. **Component Documentation**: Clear documentation for all new components
+
+### Supporting Deliverables:
+- Updated component index files with new homepage components
+- Unit tests for all navigation and homepage components
+- Integration tests for modal system functionality
+- Performance benchmarks for animation system
+- Content validation ensuring exact specification compliance
+
+## Definition of Done (DoD)
+
+### Functional Criteria:
+- [ ] Homepage renders correctly with hero section and navigation cards
+- [ ] All four navigation cards display exact Atlas content as specified
+- [ ] Navigation cards trigger modal overlays with smooth animations
+- [ ] Modal system handles multiple overlapping modals gracefully
+- [ ] CTA buttons connect to appropriate modal content
+- [ ] Navigation menu provides access to all modal content areas
+
+### Quality Criteria:
+- [ ] All components pass TypeScript compilation without errors
+- [ ] Components follow Atlas Design System styling and color palette
+- [ ] Animation performance meets 60fps standard for smooth user experience
+- [ ] Content matches exact specifications from Atlas content requirements
+- [ ] Components are modular and can be imported independently
+- [ ] Code quality meets established standards with proper documentation
+
+### Technical Criteria:
+- [ ] Responsive layout works across desktop and tablet screen sizes
+- [ ] Modal state management works reliably with multiple modal instances
+- [ ] Component props interfaces are well-defined with TypeScript
+- [ ] All components export cleanly through component index files
+- [ ] Integration with existing Phase 1 foundation components works seamlessly
+
+### Validation Criteria:
+- [ ] Homepage provides clear pathway to all Atlas content areas
+- [ ] User can navigate from homepage to any modal content area smoothly
+- [ ] Modal system provides consistent user experience across all content types
+- [ ] Design system implementation matches Atlas specifications exactly
+- [ ] Components are ready for transfer to existing Atlas codebase
+
+## Phase Success Metrics
+
+- **Completion Timeline**: Phase completed within 3-4 days
+- **Component Coverage**: 100% of homepage navigation elements implemented
+- **Content Fidelity**: 100% exact content compliance with specifications
+- **Modal Integration**: All navigation elements connect to modal system successfully
+- **Performance**: Smooth animations maintaining 60fps user experience
+- **Code Quality**: All components pass linting and type checking without errors
+
+## Next Phase Preparation
+
+**Phase 3 Focus**: Full Page Modals & Content Integration
+- Build complete About Atlas modal with in-depth team and mission content
+- Create Atlas Tools modal with Real Estate Analyzer placeholder
+- Implement Project Log modal with filtering system and content structure
+- Develop Get Involved modal with multi-persona contact forms
+
+**Prerequisites for Phase 3**: 
+- Phase 2 DoD criteria fully met and verified
+- Homepage navigation flow tested and validated
+- Modal system proven stable with Phase 2 content
+- Component architecture validated for complex modal content
+
+---
+
+**Phase Owner**: AI Development Assistant  
+**Estimated Duration**: 3-4 days  
+**Success Metric**: Complete functional homepage with modal navigation ready for Phase 3 content development  
+**Related Documents**: 
+- `Atlas-Site-Revamp-Project-Overview.md`
+- `Phase-1-Foundation-Design-System-Progress.mdc`
+- `Atlas-Design-System.md`
+

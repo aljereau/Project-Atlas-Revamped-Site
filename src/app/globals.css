@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Atlas Design System CSS Custom Properties */
+:root {
+  /* Colors */
+  --paper-white: #FEFEFE;
+  --paper-cream: #FAF8F5;
+  --soft-beige: #F5F2ED;
+  --warm-gray: #E8E5E0;
+  
+  --text-primary: #2C2C2C;
+  --text-secondary: #6B6B6B;
+  --text-muted: #9A9A9A;
+  
+  --atlas-green: #7A8B73;
+  --atlas-green-light: #A4B49A;
+  --atlas-green-dark: #5C6B54;
+  
+  --bright-orange: #E67E22;
+  --orange-hover: #D35400;
+  --orange-light: #F39C12;
+  
+  --border-light: #E0DDD6;
+  --border-medium: #D0CCC3;
+  --shadow-subtle: rgba(44, 44, 44, 0.08);
+
+  /* Typography */
+  --font-serif: 'Crimson Text', 'Times New Roman', serif;
+  --font-sans: 'Inter', 'Helvetica Neue', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Consolas', monospace;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-xxl: 3rem;
+  --space-xxxl: 4rem;
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-sans);
+  background-color: var(--paper-cream);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Paper-like organic feel */
+body {
+  background: var(--paper-cream);
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(44, 44, 44, 0.03) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+p, span, div {
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+}
+
+/* Link styles */
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--atlas-green);
+}
+
+/* Button base styles */
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+button:focus {
+  outline: 2px solid var(--bright-orange);
+  outline-offset: 2px;
+}
+
+/* Modal overlay base */
+.modal-overlay {
+  background: rgba(44, 44, 44, 0.4);
+  backdrop-filter: blur(4px);
+}
+
+/* Smooth transitions for all interactive elements */
+.interactive {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.interactive:hover {
+  transform: translateY(-1px);
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print styles */
+@media print {
+  body {
+    background: white;
+    color: black;
+  }
+} 

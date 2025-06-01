@@ -1,0 +1,229 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Phase 1: Foundation & Design System Setup - Definition
+
+## Overview
+
+This phase focuses on establishing the foundational infrastructure for the Atlas Site Revamp project's dashboard-style interface. The goal is to set up the Next.js project structure with TypeScript, Tailwind CSS, and Framer Motion, define the comprehensive design system with muted color palette and organic typography, and create the modal/panel component architecture for maximum transferability to the existing Atlas codebase.
+
+## Objectives
+
+1. **Establish Next.js Project Structure**: Set up Next.js 14+ with TypeScript, Tailwind CSS, and Framer Motion in organized folder structure
+2. **Define Design System**: Create comprehensive color palette based on muted beiges, sage green, and orange accents with paper-like organic typography
+3. **Build Component Architecture Foundation**: Set up modular component structure with clear separation between homepage, modals, UI components, and navigation
+4. **Implement Modal System Base**: Create centralized modal management system with smooth animations and overlay handling
+5. **Ensure Transferability**: Design all components with clean props interfaces for seamless integration into existing Atlas codebase
+
+## Prerequisites
+
+* **Project Overview Complete**: `Atlas-Site-Revamp-Project-Overview.md` finalized with complete component architecture and technical specifications ✅
+* **Universal Project Structure**: All 15 project folders created following `@universal-project-structure-governance-001.mdc` ✅
+* **Development Environment**: Node.js 18+ and npm/yarn available for Next.js development ✅
+* **Design Reference**: Atlas-Design-System.md with paper-like organic aesthetic ✅
+* **Content Requirements**: All content specifications documented and approved for exact usage ✅
+
+## Assumptions
+
+* **Existing Codebase Compatibility**: Current Atlas React/Next.js infrastructure will accept modular component integration without major modifications
+* **Design System Flexibility**: Muted color palette and organic typography will work effectively across all planned modal and panel interfaces
+* **Animation Performance**: Framer Motion animations will perform smoothly on target devices without significant optimization
+* **Component Modularity**: Clean separation between homepage teasers and full modal content will provide clear user experience
+
+## Scope
+
+### In Scope:
+
+* **Next.js Project Setup**: Complete project initialization with TypeScript, Tailwind CSS, Framer Motion, ESLint, and Prettier configuration
+* **Design System Definition**: Color palette (muted beiges, sage green, orange), typography system (serif + sans-serif), spacing, and component styling standards
+* **Component Architecture**: Folder structure with `/components/homepage/`, `/components/modals/`, `/components/ui/`, `/components/navigation/`
+* **Modal System Foundation**: Base modal management with state handling, animation coordination, and overlay management
+* **Development Standards**: TypeScript type definitions, component documentation templates, and integration guidelines
+
+### Out of Scope:
+
+* **Actual Content Integration**: Real content will be integrated in Phase 3 (using placeholder content for foundation testing)
+* **Full Animation Implementation**: Complex Apple notch-inspired animations deferred to Phase 4 (basic modal open/close only)
+* **Mobile Optimization**: Responsive design and mobile-specific interactions addressed in Phase 4
+* **API Integration**: Real Estate Analyzer and other tool integrations handled in later phases
+
+## Risk Assessment
+
+### High Impact Risks:
+1. **Component Transferability Issues**: Risk that component architecture doesn't integrate smoothly with existing Atlas codebase
+   - **Mitigation**: Regular compatibility testing with existing codebase structure, clear documentation of dependencies
+   - **Contingency**: Redesign component interfaces if integration issues discovered
+
+2. **Design System Inconsistency**: Risk that color palette and typography don't achieve desired organic, paper-like aesthetic
+   - **Mitigation**: Create comprehensive design tokens and test across different component types
+   - **Contingency**: Iterate on color palette and typography based on visual testing results
+
+### Medium Impact Risks:
+3. **Modal System Complexity**: Risk that centralized modal management becomes overly complex for simple use cases
+   - **Mitigation**: Start with simple modal implementation and add complexity gradually
+   - **Contingency**: Simplify modal system if complexity impacts development speed
+
+4. **TypeScript Configuration Issues**: Risk of TypeScript setup conflicts with existing Atlas project configuration
+   - **Mitigation**: Review existing Atlas TypeScript config and ensure compatibility
+   - **Contingency**: Adjust TypeScript configuration to match existing project standards
+
+## Tasks
+
+### Task 1.1: Next.js Project Initialization & Configuration
+**Duration**: 1 day
+**Description**: Set up complete Next.js project with all required dependencies and configurations
+
+**Subtasks**:
+- 1.1.1: Initialize Next.js 14+ project with TypeScript template
+- 1.1.2: Install and configure Tailwind CSS with custom configuration
+- 1.1.3: Install and configure Framer Motion for animations
+- 1.1.4: Set up ESLint and Prettier for code quality
+- 1.1.5: Create basic project structure following defined source code organization
+
+**Expected Outputs**: 
+- Working Next.js project with TypeScript compilation
+- Tailwind CSS configured with custom config file
+- Framer Motion installed and basic test animation working
+- Clean code formatting with ESLint/Prettier
+
+### Task 1.2: Design System & Color Palette Implementation
+**Duration**: 1 day  
+**Description**: Implement the Atlas Design System with Tailwind CSS configuration
+
+**Subtasks**:
+- 1.2.1: Configure Tailwind CSS with Atlas color palette (muted beiges, sage green, orange)
+- 1.2.2: Set up typography system with Crimson Text (serif) and Inter (sans-serif)
+- 1.2.3: Implement spacing scale and component patterns
+- 1.2.4: Create CSS custom properties for design tokens
+- 1.2.5: Test design system with sample components
+
+**Expected Outputs**:
+- Complete color palette with hex codes and Tailwind classes
+- Typography hierarchy with font combinations
+- Custom Tailwind theme configuration
+- Design system documentation
+
+### Task 1.3: Component Architecture Foundation Setup
+**Duration**: 1 day
+**Description**: Establish modular component folder structure and create base component templates
+
+**Subtasks**:
+- 1.3.1: Create component folder structure (`/homepage/`, `/modals/`, `/ui/`, `/navigation/`)
+- 1.3.2: Set up TypeScript type definitions for component props
+- 1.3.3: Create base component templates with proper TypeScript interfaces
+- 1.3.4: Establish component documentation standards
+- 1.3.5: Create component index files for clean imports
+
+**Expected Outputs**:
+- Organized component folder structure
+- Base component templates with TypeScript types
+- Component documentation templates
+- Clean import/export system
+
+### Task 1.4: Modal System Base Implementation
+**Duration**: 1-2 days
+**Description**: Build centralized modal management system with state handling and basic animations
+
+**Subtasks**:
+- 1.4.1: Create modal context and provider for state management
+- 1.4.2: Implement base modal component with overlay and content area
+- 1.4.3: Add basic open/close animations using Framer Motion
+- 1.4.4: Create modal hook for easy component integration
+- 1.4.5: Test modal system with sample content
+
+**Expected Outputs**:
+- Working modal management system
+- Base modal component with animations
+- Modal context provider and custom hook
+- Sample implementation demonstrating functionality
+
+## Implementation Guidelines
+
+### Development Standards:
+- **TypeScript First**: All components must have proper TypeScript interfaces and type definitions
+- **Component Documentation**: Every component requires JSDoc comments explaining purpose, props, and usage
+- **Clean Imports**: Use index files for clean component imports and avoid deep folder references
+- **Consistent Naming**: Follow established naming conventions for components, types, and files
+
+### Testing Requirements:
+- **Component Functionality**: Basic component rendering tests for all base components
+- **Modal System**: Test modal open/close functionality and state management
+- **TypeScript Compilation**: Ensure all TypeScript compiles without errors
+- **Design System**: Visual verification that color palette and typography render correctly
+
+### Quality Assurance:
+- **Code Quality**: All code must pass ESLint and Prettier formatting
+- **Component Modularity**: Verify components can be easily exported and imported
+- **Performance**: Ensure modal animations run smoothly at 60fps
+- **Transferability**: Test that components work independently of project structure
+
+## Deliverables
+
+### Technical Deliverables:
+1. **Next.js Project**: Complete project setup with all dependencies configured
+2. **Design System**: Documented color palette, typography, and styling standards
+3. **Component Architecture**: Organized folder structure with base component templates
+4. **Modal System**: Working modal management with state handling and basic animations
+5. **TypeScript Configuration**: Complete type definitions and interfaces for all components
+
+### Documentation Deliverables:
+1. **Setup Documentation**: Instructions for running and developing the project
+2. **Design System Guide**: Complete guide to using colors, typography, and styling
+3. **Component Documentation**: Usage guide for component architecture and modal system
+4. **Integration Guide**: Instructions for transferring components to existing Atlas codebase
+
+## Definition of Done (DoD)
+
+### Technical Completion Criteria:
+- [ ] Next.js project runs successfully with `npm run dev`
+- [ ] All TypeScript compilation passes without errors
+- [ ] Tailwind CSS custom theme displays all Atlas design system colors and typography
+- [ ] Basic modal opens and closes with smooth Framer Motion animations
+- [ ] Component folder structure matches defined architecture
+- [ ] ESLint and Prettier run without errors
+
+### Quality Assurance Criteria:
+- [ ] Design system matches paper-like organic aesthetic from Atlas-Design-System.md
+- [ ] Modal system handles multiple overlapping modals gracefully
+- [ ] All components export cleanly and can be imported independently
+- [ ] Component props interfaces are well-defined with TypeScript
+- [ ] Code quality meets established standards
+
+### Documentation Criteria:
+- [ ] Setup documentation allows new developer to run project
+- [ ] Design system guide provides clear usage instructions
+- [ ] Component documentation explains architecture and modal system
+- [ ] Integration guide provides clear steps for Atlas codebase transfer
+
+### Validation Criteria:
+- [ ] Sample homepage layout renders with design system
+- [ ] Sample modal demonstrates full open/close functionality
+- [ ] Component structure supports planned homepage and modal architecture
+- [ ] Performance testing confirms smooth animations
+- [ ] Transferability testing confirms components work independently
+
+## Dependencies & Relationships
+
+### Dependent on:
+- **Project Overview**: `Atlas-Site-Revamp-Project-Overview.md` provides complete technical specifications
+- **Universal Structure**: Project folder structure must be established first
+- **Design Reference**: Reference image for aesthetic guidance
+
+### Enables:
+- **Phase 2**: Homepage & Core Modal Components development
+- **Phase 3**: Full Page Modals & Content Integration
+- **Phase 4**: Animation Enhancement & Polish
+
+### Critical Path Items:
+- Design system definition must complete before component development
+- Modal system foundation required for all subsequent modal components
+- Component architecture must be established before content integration
+
+---
+
+**Phase Owner**: AI Development Assistant  
+**Estimated Duration**: 3-4 days  
+**Success Metric**: Complete foundation ready for Phase 2 homepage component development  
+**Next Phase Trigger**: All DoD criteria met and documented in `Phase-1-Foundation-Design-System-Progress.mdc`
