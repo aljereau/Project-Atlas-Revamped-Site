@@ -1,9 +1,10 @@
 # Atlas Site Revamp - GitHub Push Script
 # Usage: .\push-to-github.ps1 "Your commit message"
+# Or just: .\push-to-github.ps1 (uses default message)
 
 param(
-    [Parameter(Mandatory=$true)]
-    [string]$CommitMessage
+    [Parameter(Mandatory=$false)]
+    [string]$CommitMessage = "Update: Atlas Site development progress"
 )
 
 Write-Host "[ATLAS] GitHub Push Script" -ForegroundColor Cyan
@@ -22,7 +23,7 @@ if (!$status) {
     exit 0
 }
 
-Write-Host "[INFO] Changes detected. Preparing to commit and push..." -ForegroundColor Yellow
+Write-Host "[INFO] Changes detected. Pushing to GitHub..." -ForegroundColor Yellow
 
 # Add all changes
 Write-Host "Adding all changes..." -ForegroundColor White
@@ -33,8 +34,8 @@ if ($LASTEXITCODE -ne 0) {
     exit 1
 }
 
-# Commit with provided message
-Write-Host "Committing changes with message: '$CommitMessage'" -ForegroundColor White
+# Commit with message
+Write-Host "Committing with message: '$CommitMessage'" -ForegroundColor White
 git commit -m $CommitMessage
 
 if ($LASTEXITCODE -ne 0) {
