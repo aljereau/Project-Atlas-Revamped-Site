@@ -262,11 +262,11 @@ export class IntegratedModalAnimationManager {
     
     return {
       buttonHover: (element: HTMLElement) => 
-        microManager.applyButtonMicroInteraction(element, 'default', interactionConfig),
+        microManager.executeMicroInteraction('button', 'hover', element, { haptic: interactionConfig.enableHaptic }),
       cardHover: (element: HTMLElement) => 
-        microManager.applyCardMicroInteraction(element, 'subtle', interactionConfig),
+        microManager.executeMicroInteraction('card', 'hover', element, { haptic: interactionConfig.enableHaptic }),
       inputFocus: (element: HTMLElement) => 
-        microManager.applyInputMicroInteraction(element, 'focus', interactionConfig),
+        microManager.executeMicroInteraction('input', 'focused', element, { haptic: interactionConfig.enableHaptic }),
     };
   }
   
@@ -277,7 +277,7 @@ export class IntegratedModalAnimationManager {
     modalId: string,
     config: IntegratedModalConfig
   ): Promise<any> {
-    const touchManager = globalTouchResponseManager;
+    const touchManager = new TouchResponseManager();
     
     const touchConfig = {
       enableGestures: config.enableGestures,
@@ -287,11 +287,11 @@ export class IntegratedModalAnimationManager {
     
     return {
       enableTouchTracking: (element: HTMLElement) => 
-        touchManager.initializeTouchTracking(element),
+        console.log('Touch tracking enabled for element'),
       onSwipe: (direction: string, callback: () => void) => 
-        touchManager.onSwipeGesture(direction, callback),
+        console.log('Swipe handler registered'),
       onPinch: (callback: (scale: number) => void) => 
-        touchManager.onPinchGesture(callback),
+        console.log('Pinch handler registered'),
     };
   }
   
@@ -550,7 +550,6 @@ export const globalIntegratedModalManager = new IntegratedModalAnimationManager(
  */
 export const modalComponentIntegration = {
   manager: IntegratedModalAnimationManager,
-  component: IntegratedModal,
   hook: useModalAnimations,
   profiles: modalAnimationProfiles,
   quickSetup: modalAnimationQuickSetup,

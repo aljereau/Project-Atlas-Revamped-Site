@@ -573,10 +573,10 @@ export class AutomatedPerformanceTestSuite {
         // Small delay between tests
         await new Promise(resolve => setTimeout(resolve, 100));
       } catch (error) {
-        console.error(`Test failed for ${testCase.modalId}:`, error);
+        console.error(`Failed to run performance test for ${testCase.modalId}:`, error);
         results.push({
           modalId: testCase.modalId,
-          error: error.message,
+          error: error instanceof Error ? error.message : 'Unknown error',
           passed: false,
         });
       }

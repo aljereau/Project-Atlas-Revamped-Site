@@ -4,26 +4,34 @@
  */
 
 // Network Information API
-interface NetworkInformation extends EventTarget {
-  readonly effectiveType: 'slow-2g' | '2g' | '3g' | '4g';
-  readonly downlink: number;
-  readonly downlinkMax: number;
-  readonly rtt: number;
-  readonly saveData: boolean;
-  readonly type: 'bluetooth' | 'cellular' | 'ethernet' | 'none' | 'wifi' | 'wimax' | 'other' | 'unknown';
-  onchange: ((this: NetworkInformation, ev: Event) => any) | null;
-}
+declare global {
+  interface NetworkInformation extends EventTarget {
+    readonly effectiveType: 'slow-2g' | '2g' | '3g' | '4g';
+    readonly downlink: number;
+    readonly downlinkMax: number;
+    readonly rtt: number;
+    readonly saveData: boolean;
+    readonly type: 'bluetooth' | 'cellular' | 'ethernet' | 'none' | 'wifi' | 'wimax' | 'other' | 'unknown';
+    onchange: ((this: NetworkInformation, ev: Event) => any) | null;
+  }
 
-// Battery Manager API
-interface BatteryManager extends EventTarget {
-  readonly charging: boolean;
-  readonly chargingTime: number;
-  readonly dischargingTime: number;
-  readonly level: number;
-  onchargingchange: ((this: BatteryManager, ev: Event) => any) | null;
-  onchargingtimechange: ((this: BatteryManager, ev: Event) => any) | null;
-  ondischargingtimechange: ((this: BatteryManager, ev: Event) => any) | null;
-  onlevelchange: ((this: BatteryManager, ev: Event) => any) | null;
+  // Battery Manager API
+  interface BatteryManager extends EventTarget {
+    readonly charging: boolean;
+    readonly chargingTime: number;
+    readonly dischargingTime: number;
+    readonly level: number;
+    onchargingchange: ((this: BatteryManager, ev: Event) => any) | null;
+    onchargingtimechange: ((this: BatteryManager, ev: Event) => any) | null;
+    ondischargingtimechange: ((this: BatteryManager, ev: Event) => any) | null;
+    onlevelchange: ((this: BatteryManager, ev: Event) => any) | null;
+  }
+
+  // Navigator extensions
+  interface Navigator {
+    readonly connection?: NetworkInformation;
+    getBattery?(): Promise<BatteryManager>;
+  }
 }
 
 // Device Memory API

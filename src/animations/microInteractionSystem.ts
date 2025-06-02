@@ -574,6 +574,13 @@ export const microInteractionUtils = {
 /**
  * CSS-in-JS Styles for Micro-Interactions
  */
+const interactionBase = {
+  transition: 'all 0.2s ease',
+  cursor: 'pointer',
+  userSelect: 'none' as const,
+  WebkitTapHighlightColor: 'transparent',
+};
+
 export const microInteractionStyles = {
   rippleKeyframes: `
     @keyframes ripple-animation {
@@ -584,21 +591,16 @@ export const microInteractionStyles = {
     }
   `,
   
-  interactionBase: {
-    transition: 'all 0.2s ease',
-    cursor: 'pointer',
-    userSelect: 'none' as const,
-    WebkitTapHighlightColor: 'transparent',
-  },
+  interactionBase,
   
   buttonBase: {
-    ...this.interactionBase,
+    ...interactionBase,
     transformOrigin: 'center',
     willChange: 'transform, box-shadow',
   },
   
   cardBase: {
-    ...this.interactionBase,
+    ...interactionBase,
     transformOrigin: 'center',
     willChange: 'transform, box-shadow',
     perspective: '1000px',

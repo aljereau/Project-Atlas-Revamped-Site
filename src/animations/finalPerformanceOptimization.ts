@@ -796,7 +796,13 @@ export class FinalPerformanceOptimizationSystem {
   }
 
   private isGPUAvailable(): boolean {
-    return 'GPU' in window || 'webgl' in document.createElement('canvas').getContext?.('webgl') || {};
+    try {
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      return !!context;
+    } catch {
+      return false;
+    }
   }
 
   private getGPUUsage(): number {
@@ -853,7 +859,12 @@ export class FinalPerformanceOptimizationSystem {
     return {
       allocate: (size: number, type: string) => ({ size, type }),
       deallocate: (resource: any) => { /* cleanup */ },
-      monitor: () => this.getMemoryInfo(),
+      monitor: (): MemoryMetrics => ({
+        used: this.getMemoryInfo().used,
+        available: this.getMemoryInfo().available,
+        peak: this.getMemoryInfo().used,
+        efficiency: 85
+      }),
       cleanup: () => this.cleanupResources(),
       preventLeaks: true
     };

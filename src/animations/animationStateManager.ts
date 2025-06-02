@@ -5,10 +5,10 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { modalAnimations, appleEasing, timing } from './modalAnimations';
+import { animations, appleEasing, timing } from './modalAnimations';
 import { modalContentStagger, globalContentStaggerOrchestrator } from './modalContentStagger';
 import { microInteractionSystem, globalMicroInteractionManager } from './microInteractionSystem';
-import { touchResponseSystem, globalTouchResponseManager } from './touchResponseSystem';
+import { touchResponseSystem, TouchResponseManager } from './touchResponseSystem';
 import { advancedGestureRecognition, globalAdvancedGestureManager } from './advancedGestureRecognition';
 import { modalPerformanceValidation, globalPerformanceMonitor } from './modalPerformanceValidation';
 
@@ -80,8 +80,8 @@ export class AnimationStateManager {
     load: { low: 0.3, medium: 0.6, high: 0.8 },
   };
   
-  private cleanupInterval: NodeJS.Timeout | null = null;
-  private monitoringInterval: NodeJS.Timeout | null = null;
+  private cleanupInterval: number | null = null;
+  private monitoringInterval: number | null = null;
   
   constructor() {
     this.globalState = {
@@ -242,7 +242,7 @@ export class AnimationStateManager {
           this.updateComponentState(componentId, {
             performanceMetrics: metrics,
             resourceUsage: {
-              memoryUsage: metrics.memoryUsage || 0,
+              memoryUsage: metrics.memory?.heapUsed || 0,
               cpuUsage: 0, // Would need additional monitoring
               frameRate: metrics.frameRate?.average || 60,
             },
@@ -662,9 +662,4 @@ export const animationStateManagement = {
   manager: AnimationStateManager,
   hook: useAnimationState,
   global: globalAnimationStateManager,
-  types: {
-    AnimationStateConfig,
-    ComponentAnimationState,
-    GlobalAnimationState,
-  },
 } as const; 

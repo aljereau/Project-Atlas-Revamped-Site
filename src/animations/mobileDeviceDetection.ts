@@ -926,12 +926,4 @@ export const mobileDeviceDetection = {
   detector: MobileDeviceDetector,
   hook: useDeviceDetection,
   global: globalMobileDeviceDetector,
-  types: {
-    DeviceType,
-    PerformanceTier,
-    MobilePlatform,
-    DeviceCapabilities,
-    DeviceInfo,
-    AdaptiveAnimationConfig,
-  },
 } as const; 

@@ -6,7 +6,7 @@
 
 'use client';
 
-import { useEffect, useRef, useCallback, useState } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { globalMobileDeviceDetector } from './mobileDeviceDetection';
 import type { DeviceInfo, AdaptiveAnimationConfig } from './mobileDeviceDetection';
 
@@ -137,7 +137,7 @@ export class TouchGestureOptimizer {
   private gestureData: Partial<TouchGestureData> = {};
   private lastTouchTime = 0;
   private tapCount = 0;
-  private longPressTimer: NodeJS.Timeout | null = null;
+  private longPressTimer: number | null = null;
   
   // Event handlers
   private handlers = new Map<TouchEventType, TouchGestureHandler[]>();
@@ -1152,13 +1152,4 @@ export const touchGestureOptimization = {
   optimizer: TouchGestureOptimizer,
   hook: useTouchGestureOptimization,
   global: globalTouchGestureOptimizer,
-  types: {
-    TouchEventType,
-    SwipeDirection,
-    TouchPoint,
-    TouchGestureData,
-    TouchConfig,
-    TouchOptimizationSettings,
-    TouchGestureHandler,
-  },
 } as const; 
