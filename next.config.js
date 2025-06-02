@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
-    appDir: true,
+    // appDir is deprecated in Next.js 14, removing it
   },
   images: {
     dangerouslyAllowSVG: true,
