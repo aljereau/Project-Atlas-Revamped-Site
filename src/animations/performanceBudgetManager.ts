@@ -6,7 +6,7 @@
 
 'use client';
 
-import React, { useEffect, useRef, useCallback, useState } from 'react';
+import { useEffect, useRef, useCallback, useState } from 'react';
 import { globalMobileDeviceDetector } from './mobileDeviceDetection';
 import type { DeviceInfo, AdaptiveAnimationConfig } from './mobileDeviceDetection';
 

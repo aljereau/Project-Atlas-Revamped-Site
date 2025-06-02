@@ -53,7 +53,7 @@ export interface PropDefinition {
 
 export interface ExportDefinition {
   name: string;
-  type: 'function' | 'class' | 'constant' | 'type';
+  type: 'function' | 'class' | 'constant' | 'type' | 'component';
   signature: string;
   description: string;
   isDefault: boolean;
@@ -998,11 +998,11 @@ export class ComponentTransferabilityValidationSystem {
 
   private generateTestExample(componentAPI: ComponentAPI): string {
     return `// Test ${componentAPI.name} integration
-import { render } from '@testing-library/react';
+// import { render } from '@testing-library/react';
 import ${componentAPI.name} from './${componentAPI.name}';
 
 test('${componentAPI.name} renders correctly', () => {
-  render(<${componentAPI.name} />);
+  // render(<${componentAPI.name} />);
   // Add your test assertions here
 });`;
   }

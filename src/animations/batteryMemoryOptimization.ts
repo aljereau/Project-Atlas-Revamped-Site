@@ -1,6 +1,9 @@
+/**
+ * Battery & Memory Optimization System - Task 4.4.4
+ */
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 /**
  * Battery & Memory Optimization - Task 4.4.4
