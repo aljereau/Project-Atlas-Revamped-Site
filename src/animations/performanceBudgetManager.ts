@@ -6,7 +6,7 @@
 
 'use client';
 
-import { useEffect, useRef, useCallback, useState } from 'react';
+import React, { useEffect, useRef, useCallback, useState } from 'react';
 import { globalMobileDeviceDetector } from './mobileDeviceDetection';
 import type { DeviceInfo, AdaptiveAnimationConfig } from './mobileDeviceDetection';
 
@@ -1059,8 +1059,8 @@ export const usePerformanceBudgetManager = () => {
     manager.startMonitoring();
     
     // Subscribe to alerts
-    const unsubscribeAlerts = manager.onAlert((alert) => {
-      setAlerts(prev => [...prev.slice(-9), alert]);
+    const unsubscribeAlerts = manager.onAlert((alert: PerformanceAlert) => {
+      setAlerts((prev: PerformanceAlert[]) => [...prev.slice(-9), alert]);
     });
     
     // Update state periodically
@@ -1131,13 +1131,4 @@ export const performanceBudgetManagement = {
   manager: PerformanceBudgetManager,
   hook: usePerformanceBudgetManager,
   global: globalPerformanceBudgetManager,
-  types: {
-    PerformanceBudget,
-    PerformanceMetrics,
-    PerformanceGrade,
-    AnimationPriority,
-    PerformanceAlert,
-    AnimationRegistration,
-    BudgetAllocation,
-  },
 } as const; 
