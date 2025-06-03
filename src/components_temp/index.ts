@@ -20,6 +20,7 @@ export { default as Navigation } from './navigation/Navigation';
 
 // Homepage Components
 export { default as HomePage } from './homepage/HomePage';
+// ✅ FIXED: NavigationCard correctly points to homepage/NavigationCard.tsx which uses default export
 export { default as NavigationCard } from './homepage/NavigationCard';
 
 // Re-export types

@@ -1,14 +1,41 @@
 'use client';
 
-import React, { createContext, useContext } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useModal } from '@/hooks/useModal';
-import Modal from './Modal';
-import type { ModalContextType } from '@/types';
+import React, { useState, useCallback, createContext, useContext } from 'react';
+import { motion } from 'framer-motion';
+
+/**
+ * Modal Options Interface
+ */
+export interface ModalOptions {
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+  closable?: boolean;
+  overlay?: boolean;
+}
+
+/**
+ * Active Modal Interface  
+ */
+export interface ActiveModal {
+  id: string;
+  content: React.ReactNode;
+  options: ModalOptions;
+}
+
+/**
+ * Modal Context Type
+ */
+export interface ModalContextType {
+  openModal: (modalId: string, content: React.ReactNode, options?: ModalOptions) => void;
+  closeModal: (modalId?: string) => void;
+  closeAllModals: () => void;
+  isModalOpen: (modalId: string) => boolean;
+  activeModals: ActiveModal[];
+  isOpen: boolean;
+  currentModal: string | null;
+}
 
 /**
  * Modal Context
- * Provides modal management functionality throughout the application
  */
 const ModalContext = createContext<ModalContextType | null>(null);
 
@@ -21,21 +48,59 @@ interface ModalProviderProps {
 
 /**
  * ModalProvider Component
- * Manages modal state and provides modal functionality through context
- * Integrates with Atlas Design System and Framer Motion animations
- * 
- * @component ModalProvider
- * @param {ModalProviderProps} props - Component props
- * @returns {JSX.Element} Modal context provider with animated modals
+ * Simplified version for testing modal functionality
  */
 export function ModalProvider({ children }: ModalProviderProps) {
-  const modalHook = useModal();
+  const [activeModals, setActiveModals] = useState<ActiveModal[]>([]);
+
+  const openModal = useCallback((
+    modalId: string, 
+    content: React.ReactNode, 
+    options: ModalOptions = {}
+  ): void => {
+    const defaultOptions: ModalOptions = {
+      size: 'md',
+      closable: true,
+      overlay: true,
+      ...options
+    };
+
+    const newModal: ActiveModal = {
+      id: modalId,
+      content,
+      options: defaultOptions
+    };
+
+    setActiveModals(prev => {
+      const filtered = prev.filter(modal => modal.id !== modalId);
+      return [...filtered, newModal];
+    });
+  }, []);
+
+  const closeModal = useCallback((modalId?: string): void => {
+    if (modalId) {
+      setActiveModals(prev => prev.filter(modal => modal.id !== modalId));
+    } else {
+      setActiveModals(prev => prev.slice(0, -1));
+    }
+  }, []);
+
+  const closeAllModals = useCallback((): void => {
+    setActiveModals([]);
+  }, []);
+
+  const isModalOpen = useCallback((modalId: string): boolean => {
+    return activeModals.some(modal => modal.id === modalId);
+  }, [activeModals]);
 
   const contextValue: ModalContextType = {
-    ...modalHook,
-    // Legacy compatibility for existing modal interfaces
-    isOpen: modalHook.activeModals.length > 0,
-    currentModal: modalHook.activeModals.length > 0 ? modalHook.activeModals[modalHook.activeModals.length - 1].id : null,
+    openModal,
+    closeModal,
+    closeAllModals,
+    isModalOpen,
+    activeModals,
+    isOpen: activeModals.length > 0,
+    currentModal: activeModals.length > 0 ? activeModals[activeModals.length - 1].id : null,
   };
 
   return (
@@ -43,70 +108,65 @@ export function ModalProvider({ children }: ModalProviderProps) {
       {children}
       
       {/* Modal Overlay Container */}
-      <AnimatePresence mode="multiple">
-        {modalHook.activeModals.map((modal, index) => (
+      {activeModals.map((modal, index) => (
+        <motion.div
+          key={modal.id}
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          style={{ zIndex: 50 + index }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3, ease: "easeOut" }}
+        >
+          {/* Overlay Background */}
           <motion.div
-            key={modal.id}
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{ zIndex: 50 + index }} // Stack modals on top of each other
+            className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => modal.options.closable !== false && closeModal(modal.id)}
+          />
+          
+          {/* Modal Content */}
+          <motion.div
+            className={`relative bg-paper-white rounded-lg shadow-xl border border-soft-beige/20 w-full max-h-[90vh] overflow-hidden ${getSizeClasses(modal.options.size)}`}
+            initial={{ scale: 0.95, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
             transition={{ duration: 0.3, ease: "easeOut" }}
           >
-            {/* Overlay Background */}
-            <motion.div
-              className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              onClick={() => modal.options.closable !== false && modalHook.closeModal(modal.id)}
-            />
-            
-            {/* Modal Content */}
-            <motion.div
-              className={`relative bg-paper-white rounded-lg shadow-xl border border-soft-beige/20 w-full max-h-[90vh] overflow-hidden ${getSizeClasses(modal.options.size)}`}
-              initial={{ scale: 0.95, opacity: 0, y: 20 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.95, opacity: 0, y: 20 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
-            >
-              {/* Modal Header */}
-              <div className="border-b border-soft-beige/20 px-6 py-4 flex items-center justify-between">
-                <h2 className="font-serif text-xl font-semibold text-slate-900">
-                  {modal.id.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
-                </h2>
-                
-                {/* Close Button */}
-                {modal.options.closable !== false && (
-                  <button
-                    onClick={() => modalHook.closeModal(modal.id)}
-                    className="text-slate-400 hover:text-slate-600 transition-colors duration-200 p-1"
-                    aria-label="Close modal"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                )}
-              </div>
+            {/* Modal Header */}
+            <div className="border-b border-soft-beige/20 px-6 py-4 flex items-center justify-between">
+              <h2 className="font-serif text-xl font-semibold text-slate-900">
+                {modal.id.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase())}
+              </h2>
               
-              {/* Modal Body */}
-              <div className="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
-                {modal.content}
-              </div>
-            </motion.div>
+              {/* Close Button */}
+              {modal.options.closable !== false && (
+                <button
+                  onClick={() => closeModal(modal.id)}
+                  className="text-slate-400 hover:text-slate-600 transition-colors duration-200 p-1"
+                  aria-label="Close modal"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
+            </div>
+            
+            {/* Modal Body */}
+            <div className="p-6 overflow-y-auto max-h-[calc(90vh-80px)]">
+              {modal.content}
+            </div>
           </motion.div>
-        ))}
-      </AnimatePresence>
+        </motion.div>
+      ))}
     </ModalContext.Provider>
   );
 }
 
 /**
  * Custom hook to access modal context
- * @returns {ModalContextType} Modal context methods and state
  */
 export function useModalContext(): ModalContextType {
   const context = useContext(ModalContext);
@@ -118,8 +178,6 @@ export function useModalContext(): ModalContextType {
 
 /**
  * Helper function to get size classes for modals
- * @param size - Modal size option
- * @returns CSS classes for modal sizing
  */
 function getSizeClasses(size?: string): string {
   const sizeClasses = {

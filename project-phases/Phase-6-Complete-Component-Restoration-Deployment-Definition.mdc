@@ -1,0 +1,221 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Phase 6: Complete Component Restoration & Deployment - Definition
+
+## Overview
+
+This phase focuses on systematically restoring all Atlas Dashboard components with proper React/TypeScript imports, Framer Motion v11.0.0 compatibility, and full deployment readiness. The goal is to achieve a fully functional Atlas Dashboard website with modal-first design, comprehensive animation system, and production deployment capabilities following the One-Shot Debugging Guarantee System.
+
+## Objectives
+
+1. **Component System Restoration**: Restore all dashboard, navigation, homepage, and content components with proper TypeScript types and React imports
+2. **Animation System Integration**: Integrate Framer Motion v11.0.0 compatible animation system with Apple notch-inspired fluid transitions
+3. **Modal Architecture Implementation**: Complete modal-first navigation system with dashboard overlay functionality
+4. **Error Handling & Validation**: Implement comprehensive error boundaries, validation, and accessibility compliance
+5. **Production Deployment**: Deploy fully functional Atlas Dashboard to production environment
+6. **Testing & Quality Assurance**: Comprehensive testing suite with automated validation and performance monitoring
+
+## Prerequisites
+
+- **Foundation Phase**: Completed with working Next.js foundation and ModalProvider ✅
+- **Build System**: Clean TypeScript compilation with Framer Motion v11.0.0 ✅
+- **Development Environment**: Active development server at http://localhost:3008 ✅
+- **Component Archive**: All original components available in `src/components_temp/` ✅
+- **Design System**: Tailwind CSS configured with Atlas color palette ✅
+
+## Assumptions
+
+- **Framer Motion v11.0.0**: API changes from v12+ require import pattern updates
+- **Modal-First Design**: All navigation through modal overlays, no traditional page routing
+- **TypeScript Strict Mode**: All components must pass strict type checking
+- **Component Transferability**: Components designed for integration into existing codebases
+- **Performance Requirements**: 60fps animations with GPU acceleration where supported
+
+## Scope
+
+### In Scope:
+
+- **Core Components**: Dashboard layout, navigation, homepage, content panels, modal system
+- **Animation System**: Complete motion system with micro-interactions and transitions
+- **Type Definitions**: Comprehensive TypeScript interfaces and type safety
+- **Error Handling**: Error boundaries, validation, and accessibility features
+- **Testing Suite**: Unit tests, integration tests, and performance validation
+- **Production Build**: Optimized build with deployment configuration
+- **Documentation**: Component documentation and integration guides
+
+### Out of Scope:
+
+- **Backend Integration**: API development (dashboard displays static content)
+- **User Authentication**: Login/auth system (deferred to future phases)
+- **Advanced Analytics**: Real-time data processing (static content focus)
+- **Mobile App Development**: Web-only focus (responsive design included)
+- **Content Management**: Static content approach (dynamic CMS deferred)
+
+## Risk Assessment
+
+### High Risks:
+- **React Import Issues**: TypeScript compilation failures due to missing React types
+- **Framer Motion Compatibility**: API changes between v11 and v12 breaking animations
+- **Component Dependencies**: Circular imports or missing dependency chains
+
+### Medium Risks:
+- **Performance Impact**: Complex animations affecting load times
+- **Browser Compatibility**: Advanced CSS features or JavaScript APIs
+- **Build Optimization**: Bundle size or compilation time issues
+
+### Low Risks:
+- **Design Inconsistencies**: Established design system and color palette
+- **Content Integration**: Static content approach minimizes complexity
+
+## Tasks
+
+### Task 6.1: Clean Build Environment
+- **6.1.1**: Remove empty component directories causing webpack errors
+- **6.1.2**: Clean TypeScript configuration and validate baseline compilation
+- **6.1.3**: Verify development server stability and error-free foundation
+
+### Task 6.2: Navigation System Restoration
+- **6.2.1**: Restore NavigationCard component with proper React imports
+- **6.2.2**: Implement EnhancedNavigation with Framer Motion v11 compatibility
+- **6.2.3**: Create navigation types and interfaces following TypeScript standards
+- **6.2.4**: Test navigation modal functionality and interactions
+
+### Task 6.3: Homepage Component System
+- **6.3.1**: Restore HomePage component with enhanced layout system
+- **6.3.2**: Implement EnhancedHomePage with scroll animations and micro-interactions
+- **6.3.3**: Create homepage content integration and modal triggers
+- **6.3.4**: Validate homepage-to-modal navigation flow
+
+### Task 6.4: Dashboard Architecture
+- **6.4.1**: Restore DashboardLayout with responsive design and modal integration
+- **6.4.2**: Implement DashboardContentPanel with section-based content display
+- **6.4.3**: Create DashboardSidebar with navigation and state management
+- **6.4.4**: Integrate DashboardTransition with Apple notch-inspired animations
+
+### Task 6.5: Content & Animation System
+- **6.5.1**: Restore content components with enhanced animations and micro-interactions
+- **6.5.2**: Implement complete animation orchestration system
+- **6.5.3**: Create touch response and gesture recognition systems
+- **6.5.4**: Validate performance and accessibility compliance
+
+### Task 6.6: Testing & Quality Assurance
+- **6.6.1**: Implement automated test suite for all components
+- **6.6.2**: Create integration tests for modal and navigation systems
+- **6.6.3**: Performance testing and optimization validation
+- **6.6.4**: Accessibility compliance testing and WCAG validation
+
+### Task 6.7: Production Deployment
+- **6.7.1**: Optimize production build configuration
+- **6.7.2**: Create deployment scripts and CI/CD pipeline
+- **6.7.3**: Deploy to production environment with monitoring
+- **6.7.4**: Validate production performance and functionality
+
+## Implementation Guidelines
+
+### Code Quality Standards (Following @code_quality_typehints_python.mdc adapted for TypeScript):
+- **All functions must have explicit TypeScript type annotations**
+- **React imports must include all used hooks and components explicitly**
+- **Framer Motion imports adapted for v11.0.0 API patterns**
+- **Component props interfaces clearly defined with JSDoc comments**
+
+### Component Restoration Pattern:
+```typescript
+// Standard restoration pattern for all components
+'use client';
+
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ComponentSpecificTypes } from '@/types';
+
+interface ComponentProps {
+  // Explicit prop types following TypeScript standards
+}
+
+export function ComponentName({ prop1, prop2 }: ComponentProps): JSX.Element {
+  // Component implementation with proper error handling
+}
+
+export type { ComponentProps };
+```
+
+### Validation Requirements (Following @component-validation-before-advancement-001.mdc):
+- **Build validation after each component restoration**
+- **Type checking validation with `npm run type-check`**
+- **Runtime testing in development server**
+- **Performance impact assessment for animations**
+
+## Deliverables
+
+### 6.1: Restored Component Library
+- All dashboard, navigation, homepage, and content components functional
+- Complete TypeScript type definitions and interfaces
+- Framer Motion v11.0.0 compatible animation system
+
+### 6.2: Modal-First Navigation System
+- Working modal overlay system with smooth transitions
+- Dashboard navigation with section-based content display
+- Homepage to modal navigation flow
+
+### 6.3: Animation & Interaction System
+- Complete motion system with Apple notch-inspired animations
+- Micro-interaction system for enhanced user experience
+- Touch response and gesture recognition capabilities
+
+### 6.4: Production-Ready Build
+- Optimized production build with performance monitoring
+- Deployment configuration and CI/CD pipeline
+- Comprehensive testing suite and quality assurance
+
+### 6.5: Documentation & Integration Guides
+- Component documentation with usage examples
+- Integration guides for existing codebase compatibility
+- Performance optimization and best practices documentation
+
+## Definition of Done
+
+### Technical Completion:
+- [ ] All components restored with proper React/TypeScript imports
+- [ ] Clean TypeScript compilation with zero errors
+- [ ] Framer Motion v11.0.0 fully integrated and functional
+- [ ] Modal-first navigation system operational
+- [ ] Production build successful with optimization
+
+### Quality Assurance:
+- [ ] Comprehensive test suite passing (unit + integration)
+- [ ] Performance benchmarks met (60fps animations, <3s load time)
+- [ ] Accessibility compliance validated (WCAG 2.1 AA)
+- [ ] Cross-browser compatibility verified
+- [ ] Mobile responsiveness confirmed
+
+### Deployment Readiness:
+- [ ] Production environment deployed and accessible
+- [ ] Monitoring and analytics systems operational
+- [ ] Performance metrics tracking active
+- [ ] Error tracking and alerting configured
+- [ ] Backup and rollback procedures documented
+
+### Documentation Complete:
+- [ ] All components documented with usage examples
+- [ ] Integration guides published and validated
+- [ ] Performance optimization guide available
+- [ ] Deployment procedures documented and tested
+- [ ] Phase 6 progress tracking completed with evidence
+
+## Success Metrics
+
+- **Build Performance**: Clean compilation in <30 seconds
+- **Runtime Performance**: 60fps animations, <3s initial load
+- **Code Quality**: 100% TypeScript type coverage, zero linter errors
+- **User Experience**: Smooth modal transitions, responsive interactions
+- **Production Readiness**: 99.9% uptime, <500ms response times
+
+---
+
+**Phase Owner**: AI Executor (Cursor)  
+**Stakeholders**: Atlas Development Team  
+**Timeline**: Systematic restoration with validation at each step  
+**Dependencies**: Phase 1-5 foundation components completed ✅
+

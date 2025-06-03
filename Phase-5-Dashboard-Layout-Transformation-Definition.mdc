@@ -1,0 +1,294 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Phase 5: Dashboard Layout Transformation System - Definition
+
+## Overview
+
+This phase focuses on transforming the Atlas Site from a traditional modal-based navigation system into a comprehensive dashboard-first interface paradigm. The goal is to replace modal popups with a full layout transformation system where clicking any navigation element shifts the entire interface into an interactive dashboard with sidebar navigation, panel content areas, and seamless transitions. This creates an app-like, immersive user experience where ALL site content (about, contact, tools, etc.) loads within the dashboard's middle panel area.
+
+## Objectives
+
+1. **Implement Dashboard Layout Manager**: Create a comprehensive layout system that transforms the entire page structure from homepage to dashboard mode
+2. **Develop Sidebar Navigation System**: Build left sidebar with Home, Project, Tools navigation and state management
+3. **Create Panel Content Architecture**: Implement middle panel system where ALL site content (about, contact, forms, etc.) loads dynamically
+4. **Design Layout Transition Animations**: Create smooth, Apple-inspired animations for homepage-to-dashboard transformations
+5. **Establish Dashboard-First Navigation**: Ensure all site interactions happen within the dashboard paradigm (no traditional page navigation)
+6. **Implement Restore Functionality**: Create "Restore Up" system to return to homepage from any dashboard state
+
+## Prerequisites
+
+* **Phase 1: Next.js Foundation Setup** completed and validated (all DoD items verified in `@Task-1.1-Next.js-Setup-Progress.mdc`)
+* **Phase 2-4: Component Architecture** completed with working navigation cards and animation systems
+* **ESLint 9.x Configuration** working and project running successfully with `npm run dev`
+* **Atlas Design System** fully implemented in Tailwind configuration
+* **Framer Motion** properly configured for complex layout animations
+* **Current modal system** functional and can serve as reference for content loading patterns
+
+## Assumptions
+
+* **Existing content structure** from `@atlas-content.ts` is suitable for dashboard panel display
+* **Current animation performance** (60fps) can be maintained during full layout transformations
+* **Responsive design patterns** can be adapted for dashboard layout across all device sizes
+* **User preference** strongly favors dashboard-style interaction over traditional web navigation
+* **SEO considerations** are secondary to user experience in this dashboard-first approach
+
+## Scope
+
+### In Scope:
+
+* **Dashboard Layout Manager Component**: Core system managing homepage ↔ dashboard layout states
+* **Sidebar Navigation Component**: Left sidebar with Home, Project, Tools, plus dynamic navigation items
+* **Panel Content System**: Middle panel area that dynamically loads ALL site content (about, contact, tools, project log, etc.)
+* **Bottom Navigation Tabs**: "Why we build", "Who we are", "Our Timeline" navigation within dashboard
+* **Layout Transition Animations**: Smooth, Apple-inspired transformations between homepage and dashboard modes
+* **Restore Functionality**: "Restore Up" button and navigation state management
+* **Dashboard Routing System**: URL management and state persistence for dashboard navigation
+* **Responsive Dashboard Layout**: Mobile-friendly adaptation of dashboard interface
+* **Content Integration**: Migration of existing modal content to dashboard panel system
+* **Navigation State Management**: Context system for tracking current dashboard section and navigation history
+
+### Out of Scope:
+
+* **New content creation** (use existing Atlas content from `@atlas-content.ts`)
+* **Complete modal system removal** (maintain for potential future use cases)
+* **Major design system changes** (maintain current Atlas color palette and typography)
+* **Advanced dashboard features** (widgets, customizable panels, etc. - deferred to future phases)
+* **User customization options** (panel layouts, sidebar preferences - future enhancement)
+* **Performance optimization beyond 60fps requirement** (unless critical issues arise)
+
+## Risk Assessment
+
+### High Priority Risks:
+* **R1**: Complex layout transitions could impact performance below 60fps target
+  - *Mitigation*: Implement progressive enhancement and animation degradation strategies
+* **R2**: Dashboard paradigm might confuse users expecting traditional web navigation
+  - *Mitigation*: Ensure intuitive navigation patterns and clear visual feedback
+
+### Medium Priority Risks:
+* **R3**: Mobile dashboard experience might be cramped or difficult to navigate
+  - *Mitigation*: Design mobile-first dashboard patterns with collapsible sidebar
+* **R4**: SEO impact from single-page dashboard application approach
+  - *Mitigation*: Implement proper meta tags and URL management for dashboard states
+
+### Low Priority Risks:
+* **R5**: Browser compatibility issues with complex Framer Motion layout animations
+  - *Mitigation*: Test across major browsers and provide fallback animations
+
+## Tasks
+
+### Task 5.1: Dashboard Layout Manager Implementation
+**Duration**: 2-3 days  
+**Priority**: Critical  
+**Dependencies**: None
+
+**Description**: Create the core dashboard layout management system that handles the transformation between homepage and dashboard modes.
+
+**Deliverables**:
+- `DashboardLayoutManager.tsx` component
+- `useDashboardLayout` hook for state management
+- Layout transformation logic and state persistence
+- Integration with existing homepage components
+
+**DoD**:
+- ✅ Homepage can transform into dashboard layout on navigation card click
+- ✅ Dashboard layout displays correctly with sidebar and panel areas
+- ✅ Layout state persists during browser refresh
+- ✅ Smooth transitions between homepage and dashboard modes (60fps)
+
+### Task 5.2: Sidebar Navigation System
+**Duration**: 2 days  
+**Priority**: High  
+**Dependencies**: Task 5.1
+
+**Description**: Implement the left sidebar navigation with Home, Project, Tools sections and dynamic navigation capabilities.
+
+**Deliverables**:
+- `DashboardSidebar.tsx` component
+- Navigation state management
+- Active section highlighting
+- Collapsible sidebar for mobile
+
+**DoD**:
+- ✅ Sidebar displays with Home, Project, Tools navigation items
+- ✅ Active section is visually highlighted
+- ✅ Sidebar collapses appropriately on mobile devices
+- ✅ Navigation between sections works smoothly
+- ✅ Sidebar integrates with panel content system
+
+### Task 5.3: Panel Content Architecture
+**Duration**: 3-4 days  
+**Priority**: Critical  
+**Dependencies**: Task 5.1, Task 5.2
+
+**Description**: Create the middle panel system where ALL site content loads dynamically, replacing the modal system for content display.
+
+**Deliverables**:
+- `DashboardPanel.tsx` component system
+- Dynamic content loading mechanism
+- Panel content routing and state management
+- Integration with existing Atlas content
+
+**DoD**:
+- ✅ Panel loads "What we build" content from navigation card click
+- ✅ Panel loads "About" content when accessed from navigation
+- ✅ Panel loads "Contact" form and other static content
+- ✅ Content transitions smoothly between different sections
+- ✅ Panel maintains scroll position and state appropriately
+- ✅ All existing modal content successfully migrated to panel system
+
+### Task 5.4: Bottom Navigation & Dashboard Navigation
+**Duration**: 1-2 days  
+**Priority**: Medium  
+**Dependencies**: Task 5.2, Task 5.3
+
+**Description**: Implement bottom navigation tabs ("Why we build", "Who we are", "Our Timeline") and ensure cohesive dashboard navigation experience.
+
+**Deliverables**:
+- `DashboardBottomNav.tsx` component
+- Navigation integration with panel content system
+- Consistent navigation state across all dashboard sections
+
+**DoD**:
+- ✅ Bottom navigation displays with specified tabs
+- ✅ Bottom nav integrates with panel content loading
+- ✅ Navigation state is consistent across all dashboard interactions
+- ✅ User can navigate between any content using sidebar or bottom nav
+
+### Task 5.5: Layout Transition Animations
+**Duration**: 2-3 days  
+**Priority**: High  
+**Dependencies**: Task 5.1, Task 5.3
+
+**Description**: Create smooth, Apple-inspired animations for the homepage-to-dashboard transformation and internal dashboard navigation.
+
+**Deliverables**:
+- Enhanced animation system for layout transformations
+- Apple-inspired easing and timing for dashboard transitions
+- Performance-optimized animations maintaining 60fps
+- Responsive animation adaptation
+
+**DoD**:
+- ✅ Homepage-to-dashboard transformation is smooth and visually appealing
+- ✅ Dashboard-to-homepage ("Restore Up") animation works seamlessly
+- ✅ Internal dashboard navigation has appropriate micro-animations
+- ✅ All animations maintain 60fps performance target
+- ✅ Animations adapt appropriately for mobile devices
+- ✅ Reduced motion accessibility considerations implemented
+
+### Task 5.6: Restore Functionality & State Management
+**Duration**: 1-2 days  
+**Priority**: Medium  
+**Dependencies**: Task 5.1, Task 5.5
+
+**Description**: Implement "Restore Up" functionality and comprehensive dashboard state management.
+
+**Deliverables**:
+- "Restore Up" button and functionality
+- Dashboard navigation history management
+- URL state management for dashboard sections
+- State persistence across browser sessions
+
+**DoD**:
+- ✅ "Restore Up" button returns user to homepage from any dashboard state
+- ✅ Browser back/forward buttons work correctly with dashboard navigation
+- ✅ Dashboard state persists appropriately during browser refresh
+- ✅ URL reflects current dashboard section for shareability
+- ✅ Navigation history allows appropriate back/forward navigation within dashboard
+
+## Implementation Guidelines
+
+### Code Quality Standards:
+- **Follow Atlas Design System**: Use established color palette, typography, and component patterns
+- **Component Composition**: Build reusable, composable dashboard components
+- **Performance First**: Optimize for 60fps animation performance
+- **Mobile Responsive**: Ensure dashboard works excellently on all device sizes
+- **Accessibility**: Maintain WCAG 2.1 AA+ compliance throughout dashboard system
+
+### Technical Approach:
+- **Framer Motion**: Leverage layout animations and shared layout transitions
+- **Context-based State**: Use React Context for dashboard state management
+- **CSS Grid/Flexbox**: Utilize modern CSS layout systems for dashboard structure
+- **Progressive Enhancement**: Ensure basic functionality without JavaScript
+- **TypeScript**: Maintain strict typing for all dashboard components and state
+
+### Testing Requirements:
+- **Unit Tests**: 95%+ coverage for dashboard state management logic
+- **Integration Tests**: Dashboard navigation flows and content loading
+- **Performance Tests**: Animation performance monitoring and 60fps validation
+- **Accessibility Tests**: Keyboard navigation and screen reader compatibility
+- **Responsive Tests**: Cross-device and cross-browser validation
+
+## Deliverables
+
+### Primary Deliverables:
+1. **Complete Dashboard Layout System**: Fully functional homepage-to-dashboard transformation
+2. **Sidebar Navigation**: Working left sidebar with all specified navigation items
+3. **Panel Content System**: Middle panel loading all Atlas content dynamically
+4. **Animation System**: Smooth, Apple-inspired layout transitions
+5. **Restore Functionality**: Working "Restore Up" and navigation state management
+
+### Documentation Deliverables:
+1. **Dashboard Architecture Documentation**: Component hierarchy and state flow
+2. **Animation Performance Report**: 60fps validation and optimization notes
+3. **User Experience Guide**: Dashboard navigation patterns and interaction design
+4. **Mobile Responsiveness Report**: Cross-device testing and adaptation notes
+
+### Technical Deliverables:
+1. **Component Library**: Reusable dashboard components following Atlas Design System
+2. **State Management System**: Context-based dashboard state with TypeScript interfaces
+3. **Animation Configuration**: Optimized Framer Motion setup for layout transitions
+4. **Responsive CSS**: Dashboard-specific responsive design system
+
+## Definition of Done (DoD)
+
+### Functional Requirements:
+- ✅ **Dashboard Transformation**: Clicking any navigation card transforms homepage into dashboard layout
+- ✅ **Content Loading**: ALL site content (about, contact, tools, etc.) loads in dashboard panel
+- ✅ **Navigation System**: Sidebar and bottom navigation work seamlessly together
+- ✅ **Restore Functionality**: "Restore Up" returns to homepage from any dashboard state
+- ✅ **Mobile Experience**: Dashboard adapts appropriately for mobile devices
+- ✅ **URL Management**: Dashboard sections have appropriate URLs for sharing/bookmarking
+
+### Performance Requirements:
+- ✅ **Animation Performance**: All transitions maintain 60fps on target devices
+- ✅ **Loading Performance**: Content loads smoothly in panel without jarring transitions
+- ✅ **Memory Usage**: Dashboard system doesn't significantly increase memory usage
+- ✅ **Bundle Size**: New dashboard system doesn't significantly impact bundle size
+
+### Quality Requirements:
+- ✅ **Code Quality**: ESLint passes with no errors, TypeScript strict mode compliance
+- ✅ **Test Coverage**: 95%+ unit test coverage for dashboard components and state management
+- ✅ **Accessibility**: WCAG 2.1 AA+ compliance maintained throughout dashboard
+- ✅ **Documentation**: Complete documentation of dashboard architecture and patterns
+- ✅ **Cross-browser**: Works correctly in Chrome, Firefox, Safari, Edge
+
+### User Experience Requirements:
+- ✅ **Intuitive Navigation**: Users can easily understand and navigate the dashboard system
+- ✅ **Visual Consistency**: Dashboard maintains Atlas Design System visual consistency
+- ✅ **Responsive Design**: Excellent experience across all device sizes and orientations
+- ✅ **Performance Perception**: Animations feel smooth and responsive to user interactions
+- ✅ **Content Accessibility**: All existing content easily accessible through dashboard paradigm
+
+## Success Metrics
+
+### Primary Success Metrics:
+1. **Transformation Success Rate**: 100% successful homepage-to-dashboard transformations
+2. **Animation Performance**: 100% of transitions maintain 60fps target
+3. **Content Accessibility**: 100% of existing Atlas content accessible through dashboard
+4. **Navigation Efficiency**: Users can reach any content within 2 clicks from dashboard
+5. **Mobile Experience Quality**: Dashboard functions excellently across all target mobile devices
+
+### Secondary Success Metrics:
+1. **Code Quality Score**: ESLint score remains at 98/100 or higher
+2. **Bundle Size Impact**: Less than 10% increase in JavaScript bundle size
+3. **Loading Performance**: Panel content loads within 200ms on target hardware
+4. **User Experience Consistency**: Visual and interaction patterns remain consistent with Atlas Design System
+5. **Accessibility Compliance**: Maintains or improves current WCAG 2.1 AA+ compliance score
+
+---
+
+**Next Phase Preparation**: Upon successful completion of this phase, the project will be ready for advanced dashboard features, performance optimization, or additional content integration phases based on user feedback and requirements evolution.
+

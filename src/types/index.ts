@@ -1,5 +1,6 @@
 // Component Props Types
 import React from 'react';
+import type { ModalOptions, ActiveModal } from '../hooks/useModal';
 
 export interface BaseComponentProps {
   children?: React.ReactNode
@@ -32,26 +33,23 @@ export interface ModalProps extends BaseComponentProps {
   children: React.ReactNode
 }
 
+/**
+ * Modal Context Type
+ * Provides complete modal functionality through React Context
+ */
 export interface ModalContextType {
   openModal: (modalId: string, content: React.ReactNode, options?: ModalOptions) => void
   closeModal: (modalId?: string) => void
+  closeAllModals: () => void
   isModalOpen: (modalId: string) => boolean
   activeModals: ActiveModal[]
+  // Legacy compatibility
   isOpen: boolean
   currentModal: string | null
 }
 
-export interface ModalOptions {
-  size?: 'sm' | 'md' | 'lg' | 'xl'
-  closable?: boolean
-  overlay?: boolean
-}
-
-export interface ActiveModal {
-  id: string
-  content: React.ReactNode
-  options: ModalOptions
-}
+// Re-export modal types for convenience
+export type { ModalOptions, ActiveModal } from '../hooks/useModal';
 
 // Navigation Types
 export interface NavigationItem {

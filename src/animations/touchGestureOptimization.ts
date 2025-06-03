@@ -810,8 +810,7 @@ export class TouchGestureOptimizer {
       if (this.activeTouches.size === 1 && !this.hasSignificantMovement()) {
         this.emitGesture('long-press');
       }
-      this.longPressTimer = null;
-    }, this.config.longPressTimeout);
+    }, 500) as unknown as number;
   }
   
   /**
