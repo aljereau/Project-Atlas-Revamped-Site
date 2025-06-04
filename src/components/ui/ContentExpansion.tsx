@@ -51,8 +51,7 @@ export default function ContentSandbox({
     >
       {/* Backdrop */}
       <motion.div
-        className="absolute inset-0"
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
+        className="absolute inset-0 bg-editorial-ink/20"
         onClick={onClose}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -61,13 +60,10 @@ export default function ContentSandbox({
 
       {/* Content Sandbox Panel - appears above navigation */}
       <motion.div
-        className="absolute bottom-24 left-1/2 transform -translate-x-1/2 rounded-xl shadow-2xl overflow-hidden"
+        className="absolute bottom-24 left-1/2 transform -translate-x-1/2 rounded-organic shadow-organic-xl overflow-hidden bg-paper-warm border border-border-organic"
         style={{
-          backgroundColor: '#FAF8F5',
-          border: '1px solid #E0DDD6',
           width: 'min(90vw, 800px)',
-          maxHeight: '70vh',
-          boxShadow: '0 25px 50px rgba(0, 0, 0, 0.2)'
+          maxHeight: '70vh'
         }}
         initial={{
           opacity: 0,
@@ -96,12 +92,7 @@ export default function ContentSandbox({
           <div className="absolute top-4 right-4 z-20">
             <button
               onClick={onClose}
-              className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
-              style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.9)',
-                color: '#6B6B6B',
-                border: '1px solid #E0DDD6'
-              }}
+              className="w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 bg-paper-white/90 text-editorial-stone border border-border-organic backdrop-blur-sm"
               aria-label="Close content"
             >
               <svg

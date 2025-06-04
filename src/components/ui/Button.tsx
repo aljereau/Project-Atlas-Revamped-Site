@@ -26,19 +26,20 @@ export interface ButtonProps {
 /**
  * Enhanced Button Component
  * 
- * Reusable button component following Atlas Design System
- * with multiple variants, sizes, and interaction states
+ * Reusable button component following Atlas Design System with pure design tokens
+ * Organic styling matching the Atlas aesthetic
  * 
  * Features:
- * - Atlas color palette integration
+ * - Pure design token system (no inline styles)
+ * - Atlas color palette integration with design tokens
  * - Multiple size and variant options
  * - Accessibility support with focus states
- * - Smooth animations and transitions
- * - TypeScript interface for props
+ * - Smooth animations and transitions matching Atlas aesthetic
+ * - TypeScript interface preservation for transferability
  * 
  * @component Button
  * @param {ButtonProps} props - Component props
- * @returns {JSX.Element} Enhanced button component
+ * @returns {JSX.Element} Enhanced button component with design tokens
  */
 export default function Button({
   children,
@@ -50,21 +51,21 @@ export default function Button({
   type = 'button'
 }: ButtonProps): JSX.Element {
   
-  // Base classes for all buttons
-  const baseClasses = 'font-medium rounded-xl transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 border-2';
+  // Base classes using Atlas design tokens
+  const baseClasses = 'font-editorial-sans font-medium rounded-organic transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 border border-border-organic';
   
-  // Variant-specific styling
+  // Variant-specific styling using design tokens
   const variantClasses = {
-    primary: 'bg-[#7A8B73] border-[#7A8B73] text-[#FEFEFE] hover:bg-[#6A7A63] hover:border-[#6A7A63] focus:ring-[#7A8B73]',
-    secondary: 'bg-[#E67E22] border-[#E67E22] text-[#FEFEFE] hover:bg-[#D35400] hover:border-[#D35400] focus:ring-[#E67E22]',
-    outline: 'bg-transparent border-[#7A8B73] text-[#7A8B73] hover:bg-[#7A8B73] hover:text-[#FEFEFE] focus:ring-[#7A8B73]',
+    primary: 'bg-atlas-green-500 border-atlas-green-500 text-paper-white hover:bg-atlas-green-600 hover:border-atlas-green-600 focus:ring-atlas-green-500',
+    secondary: 'bg-bright-orange-500 border-bright-orange-500 text-paper-white hover:bg-bright-orange-600 hover:border-bright-orange-600 focus:ring-bright-orange-500',
+    outline: 'bg-transparent border-atlas-green-500 text-atlas-green-500 hover:bg-atlas-green-500 hover:text-paper-white focus:ring-atlas-green-500',
   };
   
-  // Size-specific styling
+  // Size-specific styling using design tokens
   const sizeClasses = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-base',
-    lg: 'px-6 py-3 text-lg',
+    sm: 'px-cozy py-compact text-small',
+    md: 'px-comfortable py-cozy text-body',
+    lg: 'px-spacious py-comfortable text-large',
   };
   
   // Disabled state styling
@@ -78,9 +79,6 @@ export default function Button({
       onClick={onClick}
       disabled={disabled}
       className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${disabledClasses} ${className}`}
-      style={{
-        fontFamily: 'Inter, sans-serif'
-      }}
     >
       {children}
     </button>

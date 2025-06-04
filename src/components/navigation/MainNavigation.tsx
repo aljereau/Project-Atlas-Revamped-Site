@@ -45,7 +45,7 @@ export default function MainNavigation({
   return (
     <nav className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-50">
       <div 
-        className="flex items-center rounded-full p-3 shadow-lg backdrop-blur-sm"
+        className="flex items-center gap-2 rounded-full p-3 shadow-lg backdrop-blur-sm"
         style={{ 
           backgroundColor: '#FFFFFF',
           border: '1px solid #E0DDD6',
@@ -60,40 +60,45 @@ export default function MainNavigation({
               key={item.id}
               onClick={() => handleSectionChange(item.id)}
               className={`
-                relative px-4 py-3 rounded-full text-sm font-medium transition-all duration-200
-                flex items-center space-x-2 min-w-0 z-10
+                relative px-3 py-2.5 rounded-full text-sm font-medium transition-all duration-200
+                flex items-center space-x-2 min-w-0 z-10 flex-shrink-0
               `}
               style={{
-                color: isActive ? '#FFFFFF' : '#2C2C2C',
-                backgroundColor: isActive ? '#7A8B73' : 'transparent',
+                color: isActive ? '#2C2C2C' : '#6B6B6B',
+                backgroundColor: isActive ? '#FFFFFF' : 'transparent',
+                border: isActive ? '2px solid #7A8B73' : '2px solid transparent',
+                boxShadow: isActive ? '0 2px 8px rgba(122, 139, 115, 0.25)' : 'none'
               }}
               whileHover={{ 
                 scale: 1.05,
-                backgroundColor: isActive ? '#6B7A63' : '#F5F5F5'
+                backgroundColor: isActive ? '#FFFFFF' : 'rgba(122, 139, 115, 0.1)',
+                color: isActive ? '#2C2C2C' : '#7A8B73'
               }}
               whileTap={{ scale: 0.95 }}
               transition={{ duration: 0.15 }}
             >
-              {/* Enhanced active background with better contrast */}
+              {/* Enhanced active background with white contrast */}
               {isActive && (
                 <motion.div
                   className="absolute inset-0 rounded-full z-[-1]"
                   style={{ 
-                    backgroundColor: '#7A8B73',
-                    boxShadow: '0 2px 8px rgba(122, 139, 115, 0.3)'
+                    backgroundColor: '#FFFFFF',
+                    border: '2px solid #7A8B73',
+                    boxShadow: '0 4px 12px rgba(122, 139, 115, 0.3)'
                   }}
                   layoutId="activeBackground"
                   transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 />
               )}
               
-              <span className="text-base z-10">{item.icon}</span>
+              <span className="text-base z-10 flex-shrink-0">{item.icon}</span>
               <span 
-                className="hidden md:inline-block whitespace-nowrap z-10"
+                className="hidden md:inline-block whitespace-nowrap z-10 flex-shrink-0"
                 style={{ 
                   fontFamily: 'Inter, sans-serif',
-                  fontWeight: 600,
-                  textShadow: isActive ? '0 1px 2px rgba(0, 0, 0, 0.1)' : 'none'
+                  fontWeight: isActive ? 700 : 500,
+                  fontSize: '0.875rem',
+                  letterSpacing: '0.02em'
                 }}
               >
                 {item.label}

@@ -2,7 +2,6 @@
 
 import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { useModalContext } from '../modals/ModalProvider';
 
 /**
  * Dashboard Section Type
@@ -46,6 +45,10 @@ export interface DashboardLayoutProps {
   activeSection?: DashboardSection;
   /** Section change handler */
   onSectionChange?: (section: DashboardSection) => void;
+  /** Optional modal functions for section navigation */
+  modalFunctions?: {
+    openModal: (modalId: string, content: React.ReactNode, options?: any) => void;
+  };
 }
 
 /**
@@ -72,9 +75,9 @@ export default function DashboardLayout({
   children,
   className = '',
   activeSection = 'overview',
-  onSectionChange
+  onSectionChange,
+  modalFunctions
 }: DashboardLayoutProps): JSX.Element {
-  const { openModal } = useModalContext();
   
   // Merge configuration with defaults
   const layoutConfig: DashboardLayoutConfig = {
@@ -131,23 +134,25 @@ export default function DashboardLayout({
         </div>
       );
       
-      // Open modal for section content
-      console.log(`Opening ${section} dashboard section`);
-      openModal(
-        `dashboard-${section}`,
-        <div className="text-slate-700">
-          <h3 className="text-lg font-semibold mb-4">{section} Dashboard</h3>
-          <p>Content for {section} section will be implemented here.</p>
-        </div>,
-        { size: 'lg' }
-      );
+      // Open modal for section content if modal functions available
+      if (modalFunctions?.openModal) {
+        console.log(`Opening ${section} dashboard section`);
+        modalFunctions.openModal(
+          `dashboard-${section}`,
+          <div className="text-slate-700">
+            <h3 className="text-lg font-semibold mb-4">{section} Dashboard</h3>
+            <p>Content for {section} section will be implemented here.</p>
+          </div>,
+          { size: 'lg' }
+        );
+      }
       
       // Call section change handler if provided
       if (onSectionChange) {
         onSectionChange(section);
       }
     }
-  }, [navigationSections, openModal, onSectionChange]);
+  }, [navigationSections, modalFunctions, onSectionChange]);
 
   return (
     <div className={`min-h-screen bg-paper-white flex ${className}`}>
@@ -198,36 +203,71 @@ export default function DashboardLayout({
                   >
                     <span className="text-lg">{section.icon}</span>
                     {!isSidebarCollapsed && (
-                      <span className="font-medium">{section.label}</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="font-medium">{section.label}</div>
+                        <div className="text-xs text-slate-500 mt-0.5 truncate">
+                          {section.description}
+                        </div>
+                      </div>
                     )}
                   </button>
                 </li>
               ))}
             </ul>
           </nav>
-
-          {/* Sidebar Footer */}
-          <div className="p-4 border-t border-sage-green/10">
-            <div className={`${isSidebarCollapsed ? 'text-center' : ''}`}>
-              {!isSidebarCollapsed && (
-                <p className="text-xs text-slate-500">
-                  Atlas Real Estate Intelligence
-                </p>
-              )}
-            </div>
-          </div>
         </motion.aside>
       )}
 
       {/* Main Content Area */}
-      <motion.main
-        className="flex-1 overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-      >
-        {children}
-      </motion.main>
+      <main className="flex-1 flex flex-col min-w-0">
+        {/* Content Header */}
+        <header className="bg-white border-b border-sage-green/20 px-6 py-4 shadow-sm">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-2xl font-serif font-semibold text-slate-900 mb-1">
+                Atlas Dashboard
+              </h1>
+              <p className="text-sm text-slate-600">
+                Real estate intelligence platform
+              </p>
+            </div>
+            <div className="flex items-center space-x-3">
+              <span className="text-xs text-sage-green-600 font-medium px-2 py-1 bg-sage-green/10 rounded-full">
+                {activeSection.toUpperCase()}
+              </span>
+            </div>
+          </div>
+        </header>
+
+        {/* Dynamic Content Area */}
+        <div className="flex-1 p-6 overflow-auto">
+          {children || (
+            <div className="max-w-4xl mx-auto">
+              <div className="text-center py-12">
+                <h2 className="text-xl font-serif font-medium text-slate-800 mb-4">
+                  Welcome to Atlas Dashboard
+                </h2>
+                <p className="text-slate-600 mb-6">
+                  Select a section from the sidebar to get started, or integrate this layout with your content.
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {navigationSections.slice(0, 6).map((section) => (
+                    <button
+                      key={section.id}
+                      onClick={() => handleSectionClick(section.id)}
+                      className="p-4 border border-sage-green/20 rounded-lg hover:shadow-md transition-shadow text-left"
+                    >
+                      <span className="text-2xl mb-2 block">{section.icon}</span>
+                      <h3 className="font-medium text-slate-800 mb-1">{section.label}</h3>
+                      <p className="text-sm text-slate-600">{section.description}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </main>
     </div>
   );
 }

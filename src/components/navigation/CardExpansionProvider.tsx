@@ -1,73 +1,103 @@
 'use client';
 
-import React, { createContext, useContext } from 'react';
-import { useCardExpansion, type CardExpansionState, type CardExpansionActions } from '@/hooks/useCardExpansion';
+import React from 'react';
 
 /**
- * Card Expansion Context Type
- * Combines state and actions from useCardExpansion hook
+ * Card Expansion State Interface
+ * Defines the shape of card expansion state
  */
-type CardExpansionContextType = CardExpansionState & CardExpansionActions;
+export interface CardExpansionState {
+  expandedCard: string | null;
+  isExpanding: boolean;
+  isCollapsing: boolean;
+}
 
 /**
- * Card Expansion Context
- * React context for sharing card expansion state across components
+ * Card Expansion Actions Interface
+ * Defines available actions for card expansion
  */
-const CardExpansionContext = createContext<CardExpansionContextType | undefined>(undefined);
+export interface CardExpansionActions {
+  expandCard: (cardId: string) => void;
+  collapseCard: () => void;
+  toggleCard: (cardId: string) => void;
+}
+
+/**
+ * Combined Card Expansion Context Type
+ */
+export type CardExpansionContextType = CardExpansionState & CardExpansionActions;
 
 /**
  * Card Expansion Provider Props Interface
- * Following @code_quality_typehints_python.mdc for type safety
+ * Using render props pattern to avoid React Context import issues
  */
 export interface CardExpansionProviderProps {
-  /** Child components that can access card expansion context */
-  children: React.ReactNode;
+  /** Render prop function that receives card expansion state and actions */
+  children: (cardExpansionContext: CardExpansionContextType) => React.ReactNode;
 }
 
 /**
  * Card Expansion Provider Component
  * 
  * Provides card expansion state and actions to child components
- * through React Context API for centralized state management
+ * through render props pattern for centralized state management
  * 
  * Features:
  * - Centralized card expansion state
  * - Type-safe context access
- * - Performance optimized with single provider
- * - Error handling for missing provider
+ * - Performance optimized state management
+ * - Render props pattern avoids Context import issues
  * 
  * @component CardExpansionProvider
  * @param {CardExpansionProviderProps} props - Provider props
  * @returns {JSX.Element} Provider wrapper component
  */
 export function CardExpansionProvider({ children }: CardExpansionProviderProps): JSX.Element {
-  const cardExpansionState = useCardExpansion();
+  const [expandedCard, setExpandedCard] = React.useState<string | null>(null);
+  const [isExpanding, setIsExpanding] = React.useState<boolean>(false);
+  const [isCollapsing, setIsCollapsing] = React.useState<boolean>(false);
 
-  return (
-    <CardExpansionContext.Provider value={cardExpansionState}>
-      {children}
-    </CardExpansionContext.Provider>
-  );
-}
+  const expandCard = React.useCallback((cardId: string): void => {
+    if (expandedCard === cardId) return;
+    
+    setIsExpanding(true);
+    setExpandedCard(cardId);
+    
+    // Reset expansion state after animation
+    setTimeout(() => {
+      setIsExpanding(false);
+    }, 300);
+  }, [expandedCard]);
 
-/**
- * useCardExpansionContext Hook
- * 
- * Custom hook for accessing card expansion context with error handling
- * Ensures components are wrapped in CardExpansionProvider
- * 
- * @returns {CardExpansionContextType} Card expansion state and actions
- * @throws {Error} When used outside of CardExpansionProvider
- */
-export function useCardExpansionContext(): CardExpansionContextType {
-  const context = useContext(CardExpansionContext);
-  
-  if (context === undefined) {
-    throw new Error(
-      'useCardExpansionContext must be used within a CardExpansionProvider. ' +
-      'Ensure your component is wrapped in <CardExpansionProvider>.'
-    );
-  }
-  
-  return context;
+  const collapseCard = React.useCallback((): void => {
+    if (!expandedCard) return;
+    
+    setIsCollapsing(true);
+    
+    setTimeout(() => {
+      setExpandedCard(null);
+      setIsCollapsing(false);
+    }, 300);
+  }, [expandedCard]);
+
+  const toggleCard = React.useCallback((cardId: string): void => {
+    if (expandedCard === cardId) {
+      collapseCard();
+    } else {
+      expandCard(cardId);
+    }
+  }, [expandedCard, expandCard, collapseCard]);
+
+  const cardExpansionContext: CardExpansionContextType = {
+    // State
+    expandedCard,
+    isExpanding,
+    isCollapsing,
+    // Actions
+    expandCard,
+    collapseCard,
+    toggleCard,
+  };
+
+  return <>{children(cardExpansionContext)}</>;
 } 

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useCallback, createContext, useContext } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 /**
@@ -22,9 +22,9 @@ export interface ActiveModal {
 }
 
 /**
- * Modal Context Type
+ * Modal Functions Interface
  */
-export interface ModalContextType {
+export interface ModalFunctions {
   openModal: (modalId: string, content: React.ReactNode, options?: ModalOptions) => void;
   closeModal: (modalId?: string) => void;
   closeAllModals: () => void;
@@ -35,25 +35,20 @@ export interface ModalContextType {
 }
 
 /**
- * Modal Context
- */
-const ModalContext = createContext<ModalContextType | null>(null);
-
-/**
  * ModalProvider Props Interface
  */
 interface ModalProviderProps {
-  children: React.ReactNode;
+  children: (modalFunctions: ModalFunctions) => React.ReactNode;
 }
 
 /**
  * ModalProvider Component
- * Simplified version for testing modal functionality
+ * Render props pattern to avoid React Context import issues
  */
 export function ModalProvider({ children }: ModalProviderProps) {
-  const [activeModals, setActiveModals] = useState<ActiveModal[]>([]);
+  const [activeModals, setActiveModals] = React.useState<ActiveModal[]>([]);
 
-  const openModal = useCallback((
+  const openModal = React.useCallback((
     modalId: string, 
     content: React.ReactNode, 
     options: ModalOptions = {}
@@ -77,7 +72,7 @@ export function ModalProvider({ children }: ModalProviderProps) {
     });
   }, []);
 
-  const closeModal = useCallback((modalId?: string): void => {
+  const closeModal = React.useCallback((modalId?: string): void => {
     if (modalId) {
       setActiveModals(prev => prev.filter(modal => modal.id !== modalId));
     } else {
@@ -85,15 +80,15 @@ export function ModalProvider({ children }: ModalProviderProps) {
     }
   }, []);
 
-  const closeAllModals = useCallback((): void => {
+  const closeAllModals = React.useCallback((): void => {
     setActiveModals([]);
   }, []);
 
-  const isModalOpen = useCallback((modalId: string): boolean => {
+  const isModalOpen = React.useCallback((modalId: string): boolean => {
     return activeModals.some(modal => modal.id === modalId);
   }, [activeModals]);
 
-  const contextValue: ModalContextType = {
+  const modalFunctions: ModalFunctions = {
     openModal,
     closeModal,
     closeAllModals,
@@ -104,8 +99,8 @@ export function ModalProvider({ children }: ModalProviderProps) {
   };
 
   return (
-    <ModalContext.Provider value={contextValue}>
-      {children}
+    <>
+      {children(modalFunctions)}
       
       {/* Modal Overlay Container */}
       {activeModals.map((modal, index) => (
@@ -161,19 +156,8 @@ export function ModalProvider({ children }: ModalProviderProps) {
           </motion.div>
         </motion.div>
       ))}
-    </ModalContext.Provider>
+    </>
   );
-}
-
-/**
- * Custom hook to access modal context
- */
-export function useModalContext(): ModalContextType {
-  const context = useContext(ModalContext);
-  if (!context) {
-    throw new Error('useModalContext must be used within a ModalProvider');
-  }
-  return context;
 }
 
 /**

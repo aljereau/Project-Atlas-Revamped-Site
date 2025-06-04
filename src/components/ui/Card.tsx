@@ -24,19 +24,20 @@ export interface CardProps {
 /**
  * Enhanced Card Component
  * 
- * Reusable card component following Atlas Design System
- * with paper-first aesthetic and smooth interactions
+ * Reusable card component following Atlas Design System with pure design tokens
+ * Organic paper aesthetic matching Home page quality
  * 
  * Features:
- * - Atlas paper-like design aesthetic
+ * - Pure design token system (no inline styles)
+ * - Organic paper-like aesthetic with Atlas design language
  * - Multiple variants (default, elevated, outlined)
- * - Hover effects and click handling
+ * - Sophisticated hover effects matching Home page
  * - Accessible interaction states
- * - TypeScript interface for props
+ * - TypeScript interface preservation for transferability
  * 
  * @component Card
  * @param {CardProps} props - Component props
- * @returns {JSX.Element} Enhanced card component
+ * @returns {JSX.Element} Enhanced card component with design tokens
  */
 export default function Card({
   children,
@@ -47,28 +48,25 @@ export default function Card({
   variant = 'default'
 }: CardProps): JSX.Element {
   
-  // Base classes for all cards
-  const baseClasses = 'rounded-xl p-6 transition-all duration-200';
+  // Base classes using Atlas design tokens
+  const baseClasses = 'rounded-organic transition-all duration-200';
   
-  // Variant-specific styling
+  // Variant-specific styling using design tokens
   const variantClasses = {
-    default: 'bg-[#FEFEFE] border-2 border-[#D0CCC3]',
-    elevated: 'bg-[#FEFEFE] border-2 border-[#D0CCC3] shadow-md',
-    outlined: 'bg-transparent border-2 border-[#7A8B73]'
+    default: 'bg-paper-white border border-border-organic',
+    elevated: 'bg-paper-white border border-border-organic shadow-organic-md',
+    outlined: 'bg-transparent border border-atlas-green-500'
   };
   
-  // Interactive styling
+  // Interactive styling using design tokens matching Home page quality
   const interactiveClasses = (hoverable || onClick)
-    ? 'cursor-pointer hover:border-[#7A8B73] hover:shadow-lg hover:scale-[1.02] active:scale-[0.98]'
+    ? 'cursor-pointer hover:border-atlas-green-500 hover:shadow-organic-lg hover:scale-[1.02] active:scale-[0.98] group'
     : '';
   
   return (
     <div
       onClick={onClick}
       className={`${baseClasses} ${variantClasses[variant]} ${interactiveClasses} ${className}`}
-      style={{
-        backgroundColor: variant === 'outlined' ? 'transparent' : '#FEFEFE'
-      }}
       role={onClick ? 'button' : undefined}
       tabIndex={onClick ? 0 : undefined}
       onKeyDown={onClick ? (e) => {
@@ -79,26 +77,11 @@ export default function Card({
       } : undefined}
     >
       {title && (
-        <h3 
-          className="mb-3"
-          style={{ 
-            fontFamily: 'DM Serif Display, serif',
-            fontSize: '1.25rem',
-            fontWeight: 500,
-            color: '#2C2C2C',
-            lineHeight: 1.3
-          }}
-        >
+        <h3 className="mb-cozy font-editorial-serif font-medium text-large text-editorial-ink leading-tight">
           {title}
         </h3>
       )}
-      <div 
-        style={{ 
-          fontFamily: 'Inter, sans-serif',
-          color: '#6B6B6B',
-          lineHeight: 1.5
-        }}
-      >
+      <div className="font-editorial-sans text-body text-editorial-slate leading-reading">
         {children}
       </div>
     </div>

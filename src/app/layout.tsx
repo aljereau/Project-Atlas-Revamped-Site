@@ -1,8 +1,17 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Inter, Crimson_Text } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ['latin'],
+  variable: '--font-inter'
+})
+
+const crimsonText = Crimson_Text({ 
+  subsets: ['latin'],
+  weight: ['400', '600'],
+  variable: '--font-crimson'
+})
 
 export const metadata: Metadata = {
   title: 'Atlas Real Estate Intelligence Lab',
@@ -16,8 +25,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        {children}
+      <body className={`${inter.variable} ${crimsonText.variable}`}>
+            {children}
       </body>
     </html>
   )
